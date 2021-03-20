@@ -17,4 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test','App\Http\Controllers\Test@index');
+Route::get('create',function(){
+    return view('create_view');
+});
+
+Route::get('login',function(){
+    return view('login');
+});
+
+Route::post('create/add','App\Http\Controllers\Test@create');
+
+Route::get('mypage/{id}','App\Http\Controllers\Test@show');
