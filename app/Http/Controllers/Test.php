@@ -22,11 +22,11 @@ class Test extends Controller
         $name = $newAccount->name;
         return view('create_success',['name' => $name]);
     }
-    
+
     public function login(Request $request){
         if($item = Account::where('user_id',$request->name)->
         where('password',$request->password)->first()):
-               return view('show',['item' => $item]);
+            return view('show',['item' => $item]);
         else:
             return view('login');
         endif;
