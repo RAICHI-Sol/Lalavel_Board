@@ -2,6 +2,12 @@
 
 @section("title",$item->name.'さんのページ')
 
+@section('header')
+    <header>
+        <h1>Home_Page</h1>
+    </header>
+@endsection
+
 @section('main')
     <table>
         <tr>

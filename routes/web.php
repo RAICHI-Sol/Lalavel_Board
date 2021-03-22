@@ -13,18 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',function(){
+    return view('home');
 });
 
-Route::get('create',function(){
+Route::get('/create',function(){
     return view('create_view');
 });
 
-Route::get('login',function(){
+Route::get('/login',function(){
     return view('login');
 });
 
-Route::post('create/add','App\Http\Controllers\Test@create');
+Route::post('/create/add','App\Http\Controllers\Test@create');
 
-Route::get('mypage/{id}','App\Http\Controllers\Test@show');
+Route::post('/login/ok','App\Http\Controllers\Test@login');
+
+Route::get('/mypage/{id}','App\Http\Controllers\Test@show');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Account;
 
 class Test extends Controller
@@ -21,5 +21,14 @@ class Test extends Controller
         $newAccount->save();
         $name = $newAccount->name;
         return view('create_success',['name' => $name]);
+    }
+    
+    public function login(Request $request){
+        if($item = Account::where('user_id',$request->name)->
+        where('password',$request->password)->first()):
+               return view('show',['item' => $item]);
+        else:
+            return view('login');
+        endif;
     }
 }

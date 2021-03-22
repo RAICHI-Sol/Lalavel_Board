@@ -1,34 +1,67 @@
 body {
   margin: 0;
+  background-color: #ffd6d6;
 }
 
 header {
   position: relative;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding: 10px 0px;
-  font-size: 40px;
-  background: deeppink;
   width: 100%;
   height: 10%;
   margin: 0;
+  background: deeppink;
+}
+
+header h1 {
+  display: inline-block;
+  font-size: 40px;
   text-align: center;
-  font-family: 'Cherry Swash', cursive;
   color: white;
+  font-family: 'Cherry Swash', cursive;
+  margin: 0 auto;
+}
+
+header a {
+  display: inline-block;
+  font-size: 20px;
+  background: silver;
+  text-align: right;
+  color: white;
+  font-family: 'Cherry Swash', cursive;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  opacity: 1;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
+header a:hover {
+  opacity: 0.9;
 }
 
 .login_form, .create_form {
   position: relative;
-  background-color: rgba(163, 218, 240, 0.781);
+  background-color: rgba(255, 255, 255, 0.6);
+  top: 50px;
   margin: 30px auto;
-  width: 25%;
-  padding: 5px;
+  width: 30%;
+  padding: 0 10px;
+  padding-bottom: 10px;
   border-radius: 10px;
+  -webkit-transition-duration: 0.6s;
+          transition-duration: 0.6s;
 }
 
 .login_form input[type=email], .login_form input[type=password], .login_form input[type=text], .create_form input[type=email], .create_form input[type=password], .create_form input[type=text] {
   display: block;
-  margin: 10px auto;
-  width: 80%;
+  margin: 5px auto;
+  margin-bottom: 10px;
+  width: 75%;
   height: 40px;
   border-radius: 10px;
   border: solid 1px white;
@@ -36,25 +69,44 @@ header {
 
 .login_form input[type=submit], .create_form input[type=submit] {
   display: block;
-  margin: 20px auto;
+  margin: 10px auto;
+  background-color: deeppink;
+  color: white;
   border: solid 1px white;
   border-radius: 10px;
   padding: 10px 20px;
+  -webkit-transition-duration: 0.6s;
+          transition-duration: 0.6s;
+}
+
+.login_form input[type=submit]:hover, .create_form input[type=submit]:hover {
+  opacity: 0.7;
+}
+
+.login_form h1, .create_form h1 {
+  display: block;
+  font-size: 20px;
+  color: white;
+  background-color: deeppink;
+  margin: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  width: 50%;
+  text-align: center;
 }
 
 .login_form p, .create_form p {
   display: block;
-  margin: 20px auto;
+  margin: 5px auto;
   font-weight: bold;
-  width: 80%;
+  width: 75%;
 }
 
-.create_form {
-  width: 30%;
-}
-
-.create_form p {
-  margin: 10px auto;
+@media (max-width: 768px) {
+  .login_form, .create_form {
+    width: 50%;
+  }
 }
 
 table {
@@ -73,5 +125,11 @@ th {
 
 .saccess {
   text-align: center;
+}
+
+.saccess a {
+  background-color: silver;
+  color: white;
+  text-decoration: none;
 }
 /*# sourceMappingURL=app.css.map */
