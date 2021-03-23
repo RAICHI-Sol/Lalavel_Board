@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts/layout')
 
 @section("title",$item->name.'さんのページ')
 
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td>{{$item->name}}</td>
-            <td>{{$item->user_id}}</td>
+            <td>{{$item->email}}</td>
             <td>{{$item->password}}</td>
             <td>{{$item->created_at}}</td>
         </tr>

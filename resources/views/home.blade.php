@@ -1,23 +1,18 @@
-@extends('layouts.app')
+@extends('layouts/layout')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+@section("title",'Mypage')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@section('header')
+<header>
+    <h1>Home_Page</h1>
+    <p><span class="fas fa-user-circle"></span>{{Auth::user()->name}}さん</p>
+    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">Logout</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+</header>
+@endsection
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section('main')
 @endsection

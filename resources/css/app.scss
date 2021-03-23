@@ -36,6 +36,12 @@ header{
     a:hover{
         opacity:0.9;
     }
+    p{
+        color: white;
+        font-family: "M PLUS 1p";
+        font-weight:Medium;
+        font-size:15px;
+    }
 }
 
 .login_form,.create_form{
@@ -66,8 +72,9 @@ header{
         border-radius:10px;
         padding:10px 20px;
         transition-duration:0.6s;
+        opacity:0.85;
         &:hover{
-            opacity:0.7;
+            opacity:1;
         }
     }
     h1{
@@ -87,6 +94,26 @@ header{
         margin:5px auto;
         font-weight:bold;
         width:75%;
+        &.error{
+            font-size:10px;
+            color: red;
+            font-weight:normal;
+        }
+        &.center{
+            text-align: center;
+        }
+    }
+    a{
+        display: block;
+        margin:10px auto;
+        color: blue;
+        text-decoration:none;
+        text-align: center;
+        width:50%;
+        opacity: 0.7;
+        &:hover{
+            opacity: 1;
+        }
     }
     @media (max-width:768px){
         width:50%;

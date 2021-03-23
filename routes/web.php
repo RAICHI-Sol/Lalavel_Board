@@ -13,23 +13,22 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/',function(){
-//     return view('home');
-// });
+Route::get('/','App\Http\Controllers\Test@index');
 
 Route::get('/create',function(){
-    return view('create_view');
+    return view('Auth/create_view');
 });
 
-Route::get('/login',function(){
-    return view('login');
+Route::get('/logout',function(){
+    return view('home_temp');
 });
+
 
 Route::post('/create/add','App\Http\Controllers\Test@create');
 
-Route::post('/login/ok','App\Http\Controllers\Test@login');
+Route::post('/login','App\Http\Controllers\Test@login');
 
-Route::get('/mypage/{id}','App\Http\Controllers\Test@show');
+Route::get('/mypage','App\Http\Controllers\Test@show');
 
 Auth::routes();
 

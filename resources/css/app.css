@@ -44,6 +44,13 @@ header a:hover {
   opacity: 0.9;
 }
 
+header p {
+  color: white;
+  font-family: "M PLUS 1p";
+  font-weight: Medium;
+  font-size: 15px;
+}
+
 .login_form, .create_form {
   position: relative;
   background-color: rgba(255, 255, 255, 0.6);
@@ -77,10 +84,11 @@ header a:hover {
   padding: 10px 20px;
   -webkit-transition-duration: 0.6s;
           transition-duration: 0.6s;
+  opacity: 0.85;
 }
 
 .login_form input[type=submit]:hover, .create_form input[type=submit]:hover {
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .login_form h1, .create_form h1 {
@@ -101,6 +109,30 @@ header a:hover {
   margin: 5px auto;
   font-weight: bold;
   width: 75%;
+}
+
+.login_form p.error, .create_form p.error {
+  font-size: 10px;
+  color: red;
+  font-weight: normal;
+}
+
+.login_form p.center, .create_form p.center {
+  text-align: center;
+}
+
+.login_form a, .create_form a {
+  display: block;
+  margin: 10px auto;
+  color: blue;
+  text-decoration: none;
+  text-align: center;
+  width: 50%;
+  opacity: 0.7;
+}
+
+.login_form a:hover, .create_form a:hover {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
