@@ -1,3 +1,9 @@
+@mixin font($font-family,$color,$font-size){
+    font-family:$font-family,cursive;
+    color:$color;
+    font-size:$font-size;
+}
+
 body{
     margin: 0;
     background-color:rgb(255, 214, 214);
@@ -11,21 +17,22 @@ header{
     height:10%;
     margin:0;
     background: deeppink;
-    h1{
-        display: inline-block;
-        font-size: 40px;
-        text-align: center;
-        color:white;
-        font-family: 'Cherry Swash', cursive;
-        margin:0 auto;
+    h1 {
+        margin:0;
+        a{
+            display: block;
+            text-align: center;
+            @include font('Cherry Swash', white,30px);
+            margin:0 10px;
+            padding:0px 10px;
+            text-decoration: none;
+        }
     }
-    a{
-        display: inline-block;
-        font-size: 20px;
+    a.button{
+        display: block;
         background:silver;
         text-align: right;
-        color:white;
-        font-family: 'Cherry Swash', cursive;
+        @include font('Cherry Swash', white,20px);
         margin:0 10px;
         padding:10px;
         border-radius:10px;
@@ -33,14 +40,33 @@ header{
         opacity:1;
         transition-duration:0.5s;
     }
-    a:hover{
+    a.button:hover{
         opacity:0.9;
     }
     p{
-        color: white;
-        font-family: "M PLUS 1p";
+        display:block;
+        text-align:right;
+        @include font("M PLUS 1p", white,15px);
         font-weight:Medium;
-        font-size:15px;
+    }
+    form.seach_form{
+        display:flex;
+        margin:5px auto;
+        height:90%;
+        input[type = search]{
+            display: block;
+            border-radius:3px 0px 0px 3px;
+            border: solid 1px silver;
+            width:400px;
+            margin:0;
+        }
+        button{
+            display: block;
+            border-radius:0px 3px 3px 0px;
+            border: solid 1px silver;
+            margin:0;
+            @include font('M PLUS 1p', black,20px);
+        }
     }
 }
 
