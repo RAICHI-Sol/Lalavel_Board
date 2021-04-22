@@ -23,13 +23,16 @@ Route::get('/logout',function(){
     return view('home_temp');
 });
 
+Route::post('/logout','App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 Route::post('/create/add','App\Http\Controllers\Test@create');
 
-Route::post('/login','App\Http\Controllers\Test@login');
+Route::get('/login','App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+
+Route::post('/login','App\Http\Controllers\Auth\LoginController@login');
 
 Route::get('/mypage','App\Http\Controllers\Test@show');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
