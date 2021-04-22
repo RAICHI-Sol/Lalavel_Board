@@ -4,7 +4,7 @@
 
 @section('header')
     <header>
-        <h1>Home_Page</h1>
+        <h1>Home Page</h1>
     </header>
 @endsection
 
