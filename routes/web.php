@@ -19,6 +19,15 @@ Route::get('/create',function(){
     return view('Auth/create_view');
 });
 
+Route::get('/make',function(){
+    if(Auth::check()){
+        return view('make');
+    }
+    else{
+        return view('Auth/login');
+    }
+});
+
 Route::get('/logout',function(){
     return view('home_temp');
 });
@@ -31,8 +40,8 @@ Route::get('/login','App\Http\Controllers\Auth\LoginController@showLoginForm')->
 
 Route::post('/login','App\Http\Controllers\Auth\LoginController@login');
 
-Route::get('/mypage','App\Http\Controllers\Test@show');
+Route::post('/make',[App\Http\Controllers\BoardController::class, 'create'])->name('make');
 
-// Auth::routes();
+Route::post('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/result', [App\Http\Controllers\BoardController::class, 'search'])->name('result');
