@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use \App\Models\Board;
 
 class BoardTableSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class BoardTableSeeder extends Seeder
     public function run()
     {
         //テーブルのクリア
-        DB::table('board')->truncate();
+        Board::truncate();
 
         //初期データ用意
         $boards = [
@@ -29,7 +30,7 @@ class BoardTableSeeder extends Seeder
         
         //投稿
         foreach($boards as $board){
-            \App\Models\Board::create($board);
+            Board::create($board);
         }
     }
 
