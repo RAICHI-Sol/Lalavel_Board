@@ -5,18 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Board;
 use Illuminate\Support\Facades\Hash;
+
 
 class Test extends Controller
 {
-    public function index()
+    public static function check_return(){
+        if(Auth::check()):
+            return 'home';
+        else:
+            return 'home_temp';
+        endif;
+    }
+
+    public function index(Request $request)
     {
-        if(Auth::check()){
-           return view('home');
-        }
-        else{
-           return view('home_temp');
-        }
+        $count = Board::count();
+        $boards = BoardController::boards_DB($request->page);
+        $home = Test::check_return();
+
+        return view($home,[
+            'boards' => $boards,
+            'title'  => 'Home',
+            'count'  => $count,
+            'search' => 'none',
+        ]);
     }
 
     public function show(){
@@ -39,11 +53,4 @@ class Test extends Controller
         return view('create_success',['name' => $name]);
     }
 
-    public function login(Request $request){
-        if($item = User::where('email',$request->email)->first()):
-            if(Hash::check($request->password,$item->password)):
-                Auth::attempt(['email'=>$item->email,'password'=>$request->password]);
-            endif;
-        endif;
-    }
 }
