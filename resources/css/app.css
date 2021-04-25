@@ -1,6 +1,9 @@
 body {
+  position: relative;
   margin: 0;
+  padding: 0;
   background-color: #ffd6d6;
+  min-height: 100vh;
 }
 
 header {
@@ -20,34 +23,57 @@ header h1 {
 }
 
 header h1 a {
-  display: block;
   text-align: center;
   font-family: "Cherry Swash", cursive;
   color: white;
   font-size: 30px;
-  margin: 0 10px;
-  padding: 0px 10px;
-  text-decoration: none;
 }
 
-header a.button {
-  display: block;
-  background: silver;
-  text-align: right;
+header .menu {
+  position: absolute;
+  display: none;
+  background: white;
+  border-radius: 5px;
+  right: 0;
+  top: 80%;
+  z-index: 1;
+}
+
+header .menu a {
   font-family: "Cherry Swash", cursive;
+  color: black;
+  font-size: 15px;
+}
+
+header .menu a:hover {
+  background: #d6d6d6;
+}
+
+header label[for=menu] {
+  display: block;
   color: white;
-  font-size: 20px;
-  margin: 0 10px;
-  padding: 10px;
-  border-radius: 10px;
-  text-decoration: none;
-  opacity: 1;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+header label[for=menu] i {
+  margin-left: 10px;
+  vertical-align: middle;
+  font-size: 40px;
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s;
 }
 
-header a.button:hover {
-  opacity: 0.9;
+header label[for=menu] i:hover {
+  color: #bebebe;
+}
+
+header input[type=checkbox] {
+  display: none;
+}
+
+header input[type=checkbox]:checked + .menu {
+  display: block;
 }
 
 header p {
@@ -57,6 +83,35 @@ header p {
   color: white;
   font-size: 15px;
   font-weight: Medium;
+  margin: 5px;
+}
+
+header i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+header a {
+  display: block;
+  margin: 0 10px;
+  padding: 5px 10px;
+  text-decoration: none;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
+header a.make_board {
+  border-radius: 10px;
+  background: #13b813;
+  padding-top: 10px;
+  vertical-align: middle;
+  font-family: "Cherry Swash", cursive;
+  color: white;
+  font-size: 15px;
+}
+
+header a.make_board:hover {
+  background: #17e217;
 }
 
 header form.seach_form {
@@ -83,6 +138,125 @@ header form.seach_form button {
   font-family: "M PLUS 1p", cursive;
   color: black;
   font-size: 20px;
+  cursor: pointer;
+}
+
+main {
+  position: relative;
+  max-width: 1300px;
+  margin: auto;
+}
+
+main h1 {
+  font-family: "Cherry Swash", cursive;
+  color: white;
+  font-size: 25px;
+  background-color: deeppink;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+main div {
+  position: relative;
+  padding-bottom: 10px;
+  margin: 10px auto;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+}
+
+main div.saccess {
+  width: 50%;
+  text-align: center;
+}
+
+main div.saccess a {
+  background-color: silver;
+  color: white;
+  text-decoration: none;
+}
+
+main div.boards {
+  width: 50%;
+}
+
+main div.boards .board {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+main div.boards .board .date {
+  margin: 0;
+  font-size: 10px;
+  color: #6d6d6d;
+}
+
+main div.boards .button_frame {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  background: rgba(255, 255, 255, 0);
+}
+
+main div.boards .button_frame button {
+  display: inline-block;
+  margin: 5px;
+  border: solid 2px silver;
+  text-align: center;
+}
+
+main div.make_board {
+  width: 60%;
+}
+
+main div.make_board form {
+  width: 80%;
+  margin: 10px auto;
+}
+
+main div.make_board form p {
+  font-weight: bold;
+  margin: 5px 5px;
+}
+
+main div.make_board form input[type=text], main div.make_board form textarea {
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 15px;
+  display: block;
+  margin: 5px 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: solid 1px white;
+}
+
+main div.make_board form textarea {
+  width: 100%;
+  height: 160px;
+}
+
+main div.make_board form input[type=submit] {
+  display: block;
+  margin: 10px auto;
+  background-color: deeppink;
+  color: white;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  -webkit-transition-duration: 0.6s;
+          transition-duration: 0.6s;
+  opacity: 0.85;
+}
+
+main div.make_board form input[type=submit]:hover {
+  opacity: 1;
 }
 
 .login_form, .create_form {
@@ -189,13 +363,7 @@ th {
   color: white;
 }
 
-.saccess {
-  text-align: center;
-}
-
-.saccess a {
-  background-color: silver;
-  color: white;
-  text-decoration: none;
+.space {
+  margin-right: 20px;
 }
 /*# sourceMappingURL=app.css.map */

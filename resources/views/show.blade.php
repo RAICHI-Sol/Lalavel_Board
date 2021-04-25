@@ -1,4 +1,4 @@
-@extends('layouts/layout')
+@extends('layouts/layout_home')
 
 @section("title",$item->name.'さんのページ')
 
