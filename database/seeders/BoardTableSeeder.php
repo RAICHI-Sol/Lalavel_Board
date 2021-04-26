@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use \App\Models\Board;
 
 class BoardTableSeeder extends Seeder
@@ -20,12 +19,15 @@ class BoardTableSeeder extends Seeder
 
         //初期データ用意
         $boards = [
-            ['board_name'=>'トムとジェリーでおすすめの回教えてww',
+            ['board_name'=>'【相方募集】漫才ができる方',
             'create_userid'=>2,
+            'watcher'=>0],
+            ['board_name'=>'トムとジェリーでおすすめの回教えてww',
+            'create_userid'=>7,
             'watcher'=>0],
             ['board_name'=>'【急募】彼氏募集!',
             'create_userid'=>3,
-            'watcher'=>10],
+            'watcher'=>0],
         ];
         
         //投稿
