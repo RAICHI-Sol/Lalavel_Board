@@ -1,16 +1,26 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   position: relative;
-  margin: 0;
-  padding: 0;
   background-color: #ffd6d6;
+  margin: 0;
+}
+
+body.home {
+  padding: 0 0 100px 0;
   min-height: 100vh;
 }
 
 header {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   padding: 10px 0px;
   width: 100%;
   height: 10%;
@@ -18,18 +28,26 @@ header {
   background: deeppink;
 }
 
-header h1 {
+header .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0px auto;
+  max-width: 1300px;
+}
+
+header .header h1 {
   margin: 0;
 }
 
-header h1 a {
+header .header h1 a {
   text-align: center;
   font-family: "Cherry Swash", cursive;
   color: white;
   font-size: 30px;
 }
 
-header .menu {
+header .header .menu {
   position: absolute;
   display: none;
   background: white;
@@ -37,26 +55,30 @@ header .menu {
   right: 0;
   top: 80%;
   z-index: 1;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
 }
 
-header .menu a {
+header .header .menu a {
   font-family: "Cherry Swash", cursive;
   color: black;
   font-size: 15px;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
 }
 
-header .menu a:hover {
+header .header .menu a:hover {
   background: #d6d6d6;
 }
 
-header label[for=menu] {
+header .header label[for=menu] {
   display: block;
   color: white;
   cursor: pointer;
   font-size: 18px;
 }
 
-header label[for=menu] i {
+header .header label[for=menu] i {
   margin-left: 10px;
   vertical-align: middle;
   font-size: 40px;
@@ -64,19 +86,19 @@ header label[for=menu] i {
           transition-duration: 0.5s;
 }
 
-header label[for=menu] i:hover {
+header .header label[for=menu] i:hover {
   color: #bebebe;
 }
 
-header input[type=checkbox] {
+header .header input[type=checkbox] {
   display: none;
 }
 
-header input[type=checkbox]:checked + .menu {
+header .header input[type=checkbox]:checked + .menu {
   display: block;
 }
 
-header p {
+header .header p {
   display: block;
   text-align: right;
   font-family: "M PLUS 1p", cursive;
@@ -86,12 +108,12 @@ header p {
   margin: 5px;
 }
 
-header i {
+header .header i {
   font-size: 20px;
   margin-right: 10px;
 }
 
-header a {
+header .header a {
   display: block;
   margin: 0 10px;
   padding: 5px 10px;
@@ -100,7 +122,7 @@ header a {
           transition-duration: 0.5s;
 }
 
-header a.make_board {
+header .header a.make_board {
   border-radius: 10px;
   background: #13b813;
   padding-top: 10px;
@@ -110,11 +132,11 @@ header a.make_board {
   font-size: 15px;
 }
 
-header a.make_board:hover {
+header .header a.make_board:hover {
   background: #17e217;
 }
 
-header form.seach_form {
+header .header form.seach_form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -122,15 +144,15 @@ header form.seach_form {
   height: 90%;
 }
 
-header form.seach_form input[type=search] {
+header .header form.seach_form input[type=search] {
   display: block;
   border-radius: 3px 0px 0px 3px;
   border: solid 1px silver;
-  width: 400px;
   margin: 0;
+  width: 400px;
 }
 
-header form.seach_form button {
+header .header form.seach_form button {
   display: block;
   border-radius: 0px 3px 3px 0px;
   border: solid 1px silver;
@@ -157,9 +179,8 @@ main h1 {
 }
 
 main div {
-  position: relative;
   padding-bottom: 10px;
-  margin: 10px auto;
+  margin: auto;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
 }
@@ -180,16 +201,44 @@ main div.boards {
 }
 
 main div.boards .board {
+  display: block;
+  border-radius: 5px;
+  border: 0px none;
+  margin: 0 auto 10px auto;
   background-color: white;
   padding: 10px;
-  border-radius: 5px;
-  margin: 0 auto;
-  margin-bottom: 10px;
   width: 80%;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
+main div.boards .board button {
+  display: none;
 }
 
 main div.boards .board .date {
   margin: 0;
+  font-size: 10px;
+  color: #6d6d6d;
+}
+
+main div.boards .board:hover {
+  width: 90%;
+  background-color: #f3f3f3;
+}
+
+main div.boards .comment {
+  display: block;
+  border-radius: 5px;
+  border: 0px none;
+  margin: 0 auto 10px auto;
+  background-color: white;
+  padding: 10px;
+  width: 90%;
+}
+
+main div.boards .comment .date {
+  margin: 0 0 10px 0;
   font-size: 10px;
   color: #6d6d6d;
 }
@@ -229,12 +278,11 @@ main div.make_board form input[type=text], main div.make_board form textarea {
   color: black;
   font-size: 15px;
   display: block;
-  margin: 5px 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  height: 40px;
   border-radius: 10px;
   border: solid 1px white;
+  margin: 5px 10px 10px 5px;
+  width: 100%;
+  height: 40px;
 }
 
 main div.make_board form textarea {
@@ -244,11 +292,11 @@ main div.make_board form textarea {
 
 main div.make_board form input[type=submit] {
   display: block;
+  border-radius: 10px;
+  border: solid 1px white;
   margin: 10px auto;
   background-color: deeppink;
   color: white;
-  border: solid 1px white;
-  border-radius: 10px;
   padding: 10px 20px;
   -webkit-transition-duration: 0.6s;
           transition-duration: 0.6s;
@@ -265,30 +313,28 @@ main div.make_board form input[type=submit]:hover {
   top: 50px;
   margin: 30px auto;
   width: 30%;
-  padding: 0 10px;
-  padding-bottom: 10px;
+  padding: 0 10px 10px 10px;
   border-radius: 10px;
   -webkit-transition-duration: 0.6s;
           transition-duration: 0.6s;
 }
 
 .login_form input[type=email], .login_form input[type=password], .login_form input[type=text], .create_form input[type=email], .create_form input[type=password], .create_form input[type=text] {
-  display: block;
-  margin: 5px auto;
-  margin-bottom: 10px;
   width: 75%;
   height: 40px;
+  display: block;
   border-radius: 10px;
   border: solid 1px white;
+  margin: 5px auto 10px auto;
 }
 
 .login_form input[type=submit], .create_form input[type=submit] {
   display: block;
+  border-radius: 10px;
+  border: solid 1px white;
   margin: 10px auto;
   background-color: deeppink;
   color: white;
-  border: solid 1px white;
-  border-radius: 10px;
   padding: 10px 20px;
   -webkit-transition-duration: 0.6s;
           transition-duration: 0.6s;
@@ -301,12 +347,12 @@ main div.make_board form input[type=submit]:hover {
 
 .login_form h1, .create_form h1 {
   display: block;
+  border-radius: 10px;
+  border: 0px none;
+  margin: 10px 10px 20px 10px;
   font-size: 20px;
   color: white;
   background-color: deeppink;
-  margin: 10px;
-  margin-bottom: 20px;
-  border-radius: 10px;
   padding: 5px;
   width: 50%;
   text-align: center;
@@ -347,6 +393,18 @@ main div.make_board form input[type=submit]:hover {
   .login_form, .create_form {
     width: 50%;
   }
+}
+
+footer {
+  position: absolute;
+  background: black;
+  text-align: center;
+  font-family: "M PLUS 1p", cursive;
+  color: white;
+  font-size: 15px;
+  margin: auto;
+  width: 100%;
+  bottom: 0;
 }
 
 table {

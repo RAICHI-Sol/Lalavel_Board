@@ -4,111 +4,133 @@
     font-size:$font-size;
 }
 
+@mixin width_height($width,$height){
+    width:$width;
+    height:$height;
+}
+
+@mixin flame($border-radius,$border,$margin){
+    display: block;
+    border-radius:$border-radius;
+    border:$border;
+    margin:$margin;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    -webkit-appearance: none;
+    -webkit-text-size-adjust: 100%;
+}
+
 body{
     position: relative;
-    margin: 0;
-    padding:0;
     background-color:rgb(255, 214, 214);
-    min-height: 100vh;
+    margin: 0;
+    &.home{
+        padding:0 0 100px 0;
+        min-height: 100vh;
+    }
 }
 
 header{
     position: relative;
-    display: flex;
     padding:10px 0px;
-    width:100%;
-    height:10%;
+    @include width_height(100%,10%);
     margin:0;
     background: deeppink;
-    h1 {
-        margin:0;
-        a{
-            text-align: center;
-            @include font('Cherry Swash', white,30px);
+    .header{
+        display: flex;
+        margin:0px auto;
+        max-width: 1300px;
+        h1 {
+            margin:0;
+            a{
+                text-align: center;
+                @include font('Cherry Swash', white,30px);
+            }
         }
-    }
-    .menu{
-        position:absolute;
-        display: none;
-        background:white;
-        border-radius:5px;
-        right:0;
-        top:80%;
-        z-index:1;
-        a{
-            @include font('Cherry Swash',black,15px);
-        }
-        a:hover{
-            background:rgb(214, 214, 214);
-        }
-    }
-    label[for = menu]{
-        display: block;
-        color: white;
-        cursor: pointer;
-        font-size: 18px;
-        i{
-            margin-left: 10px;
-            vertical-align:middle;
-            font-size: 40px;
+        .menu{
+            position:absolute;
+            display: none;
+            background:white;
+            border-radius:5px;
+            right:0;
+            top:80%;
+            z-index:1;
             transition-duration:0.5s;
-            &:hover{
-                color: rgb(190, 190, 190);
+            a{
+                @include font('Cherry Swash',black,15px);
+                transition-duration:0.5s;
+            }
+            a:hover{
+                background:rgb(214, 214, 214);
             }
         }
-    }
-    input[type = checkbox]{
-        display: none;
-        &:checked + .menu{
-            display:block;
-        }
-    }
-    p{
-        display:block;
-        text-align:right;
-        @include font("M PLUS 1p", white,15px);
-        font-weight:Medium;
-        margin:5px;
-    }
-    i{
-        font-size:20px;
-        margin-right:10px;
-    }
-    a{
-        display: block;
-        margin:0 10px;
-        padding:5px 10px;
-        text-decoration: none;
-        transition-duration:0.5s;
-        &.make_board{
-            border-radius:10px;
-            background: rgb(19, 184, 19);
-            padding-top:10px;
-            vertical-align: middle;
-            @include font('Cherry Swash', white,15px);
-            &:hover{
-                background: rgb(23, 226, 23);
-            }
-        }
-    }
-    form.seach_form{
-        display:flex;
-        margin:5px auto;
-        height:90%;
-        input[type = search]{
+        label[for = menu]{
             display: block;
-            border-radius:3px 0px 0px 3px;
-            border: solid 1px silver;
-            width:400px;
-            margin:0;
-        }
-        button{
-            display: block;
-            border-radius:0px 3px 3px 0px;
-            border: solid 1px silver;
-            margin:0;
-            @include font('M PLUS 1p', black,20px);
+            color: white;
             cursor: pointer;
+            font-size: 18px;
+            i{
+                margin-left: 10px;
+                vertical-align:middle;
+                font-size: 40px;
+                transition-duration:0.5s;
+                &:hover{
+                    color: rgb(190, 190, 190);
+                }
+            }
+        }
+        input[type = checkbox]{
+            display: none;
+            &:checked + .menu{
+                display:block;
+            }
+        }
+        p{
+            display:block;
+            text-align:right;
+            @include font("M PLUS 1p", white,15px);
+            font-weight:Medium;
+            margin:5px;
+        }
+        i{
+            font-size:20px;
+            margin-right:10px;
+        }
+        a{
+            display: block;
+            margin:0 10px;
+            padding:5px 10px;
+            text-decoration: none;
+            transition-duration:0.5s;
+            &.make_board{
+                border-radius:10px;
+                background: rgb(19, 184, 19);
+                padding-top:10px;
+                vertical-align: middle;
+                @include font('Cherry Swash', white,15px);
+                &:hover{
+                    background: rgb(23, 226, 23);
+                }
+            }
+        }
+        form.seach_form{
+            display:flex;
+            margin:5px auto;
+            height:90%;
+            input[type = search]{
+                @include flame(3px 0px 0px 3px,solid 1px silver,0);
+                width:400px;
+            }
+            button{
+                @include flame(0px 3px 3px 0px,solid 1px silver,0);
+                @include font('M PLUS 1p', black,20px);
+                cursor: pointer;
+            }
         }
     }
 }
@@ -124,9 +146,8 @@ main{
         border-radius:5px;
     }
     div{
-        position:relative;
         padding-bottom:10px;
-        margin:10px auto;
+        margin:auto;
         background-color:rgba(255, 255, 255, 0.6);
         border-radius:5px;
         &.saccess{
@@ -141,14 +162,31 @@ main{
         &.boards{
             width:50%;
             .board{
+                @include flame(5px,0px none,0 auto 10px auto);
                 background-color:white;
                 padding:10px;
-                border-radius:5px;
-                margin:0 auto;
-                margin-bottom:10px;
                 width:80%;
+                transition-duration:0.5s;
+                button{
+                    display: none;
+                }
                 .date{
                     margin:0;
+                    font-size:10px;
+                    color: rgb(109, 109, 109);
+                }
+                &:hover{
+                    width:90%;
+                    background-color:rgb(243, 243, 243);
+                }
+            }
+            .comment{
+                @include flame(5px,0px none,0 auto 10px auto);
+                background-color:white;
+                padding:10px;
+                width:90%;
+                .date{
+                    margin:0 0 10px 0;
                     font-size:10px;
                     color: rgb(109, 109, 109);
                 }
@@ -177,25 +215,16 @@ main{
                 }
                 input[type = text],textarea{
                     @include font('M PLUS 1p', black,15px);
-                    display: block;
-                    margin:5px 10px;
-                    margin-bottom:10px;
-                    width:100%;
-                    height:40px;
-                    border-radius:10px;
-                    border:solid 1px white;
+                    @include flame(10px,solid 1px white,5px 10px 10px 5px);
+                    @include width_height(100%,40px);
                 }
                 textarea{
-                    width:100%;
-                    height:160px;
+                    @include width_height(100%,160px);
                 }
                 input[type = submit]{
-                    display: block;
-                    margin:10px auto;
+                    @include flame(10px,solid 1px white,10px auto);
                     background-color: deeppink;
                     color: white;
-                    border:solid 1px white;
-                    border-radius:10px;
                     padding:10px 20px;
                     transition-duration:0.6s;
                     opacity:0.85;
@@ -214,26 +243,17 @@ main{
     top:50px;
     margin:30px auto;
     width:30%;
-    padding:0 10px;
-    padding-bottom:10px;
+    padding:0 10px 10px 10px;
     border-radius:10px;
     transition-duration:0.6s;
     input[type = email],input[type = password],input[type = text]{
-        display: block;
-        margin:5px auto;
-        margin-bottom:10px;
-        width:75%;
-        height:40px;
-        border-radius:10px;
-        border:solid 1px white;
+        @include width_height(75%,40px);
+        @include flame(10px,solid 1px white,5px auto 10px auto);
     }
     input[type = submit]{
-        display: block;
-        margin:10px auto;
+        @include flame(10px,solid 1px white,10px auto);
         background-color: deeppink;
         color: white;
-        border:solid 1px white;
-        border-radius:10px;
         padding:10px 20px;
         transition-duration:0.6s;
         opacity:0.85;
@@ -242,13 +262,10 @@ main{
         }
     }
     h1{
-        display: block;
+        @include flame(10px,0px none,10px 10px 20px 10px);
         font-size:20px;
         color: white;
         background-color:deeppink;
-        margin:10px;
-        margin-bottom:20px;
-        border-radius:10px;
         padding:5px;
         width:50%;
         text-align: center;
@@ -284,6 +301,16 @@ main{
     }
 }
 
+footer{
+    position:absolute;
+    background: black;
+    text-align: center;
+    @include font('M PLUS 1p', white,15px);
+    margin:auto;
+    width: 100%;
+    bottom:0;
+}
+
 
 table{
     margin:10px auto;
@@ -298,8 +325,6 @@ th{
     background-color: rgb(128, 128, 128);
     color: white;
 }
-
-
 
 .space{
     margin-right: 20px;
