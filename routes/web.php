@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/','App\Http\Controllers\Test@index');
+Route::get('/','App\Http\Controllers\Test@index')->name('home_get');
 
 Route::get('/create',function(){
     return view('Auth/create_view');
-});
+})->name('create');
 
 Route::get('/make',function(){
     if(Auth::check()){
@@ -26,10 +26,10 @@ Route::get('/make',function(){
     else{
         return view('Auth/login');
     }
-});
+})->name('make_get');
 
 Route::get('/logout',function(){
-    return view('home_temp');
+    return view('home');
 });
 
 Route::post('/logout','App\Http\Controllers\Auth\LoginController@logout')->name('logout');
@@ -43,5 +43,7 @@ Route::post('/login','App\Http\Controllers\Auth\LoginController@login');
 Route::post('/make',[App\Http\Controllers\BoardController::class, 'create'])->name('make');
 
 Route::post('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/board/{id}', [App\Http\Controllers\BoardController::class, 'show']);
 
 Route::get('/result', [App\Http\Controllers\BoardController::class, 'search'])->name('result');
