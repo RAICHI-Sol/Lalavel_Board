@@ -7,21 +7,22 @@ use App\Models\Board;
 use GrahamCampbell\ResultType\Result;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Test;
+use App\Models\BoardComment;
 
 class BoardController extends Controller
 {
     public static function boards_DB($offset = 0){
-        return Board::select('board.created_at','users.name','board.board_name','board.watcher')
+        return Board::select('board.id','board.created_at','users.name','board.board_name','board.watcher')
         ->join('users','users.id','=','board.create_userid')
-        ->orderBy('board.created_at', 'desc')->offset($offset * 5)
+        ->latest()->offset($offset * 5)
         ->limit(5)->get();   
     }
 
     public static function boards_DB_search($search,$offset = 0){
-        return Board::select('board.created_at','users.name','board.board_name','board.watcher')
+        return Board::select('board.id','board.created_at','users.name','board.board_name','board.watcher')
         ->join('users','users.id','=','board.create_userid')
         ->where('board.board_name','like','%'.$search.'%')
-        ->orderBy('board.created_at', 'desc')->offset($offset * 5)
+        ->latest()->offset($offset * 5)
         ->limit(5)->get();   
     }
 
@@ -31,13 +32,23 @@ class BoardController extends Controller
         
         $boards = BoardController::boards_DB_search($request->search,$request->page);
 
-        $home = Test::check_return();
-        
-        return view($home,[
+        return view('home',[
             'boards' => $boards,
             'title'  => '検索結果('.$count.'件)',
             'count'  => $count,
             'search' => $request->search,
+        ]);
+    }
+
+    public function show($id){
+
+        $boards = Board::select('board.id','board.created_at','users.name','board.board_name','board_comment.comment')
+        ->join('users','users.id','=','board.create_userid')
+        ->join('board_comment','board_comment.board_id','=','board.id')
+        ->find($id);
+
+        return view('board',[
+            'boards' => $boards,
         ]);
     }
 
@@ -47,14 +58,18 @@ class BoardController extends Controller
         $newBoard->create_userid = Auth::user()->id;
         $newBoard->watcher = 0;
         $newBoard->save();
-        
+
+        $newBoardComment = new BoardComment();
+        $newBoardComment->board_id = $newBoard->id;
+        $newBoardComment->comment = $request->comment;
+        $newBoardComment->tag_id  = 1;
+        $newBoardComment->save();
+
         $count = Board::count();
 
         $boards = BoardController::boards_DB();
 
-        $home = Test::check_return();
-        
-        return view($home,[
+        return view('home',[
             'boards' => $boards,
             'title'  => 'Home',
             'count'  => $count,

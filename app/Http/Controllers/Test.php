@@ -7,25 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Board;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 
 class Test extends Controller
 {
-    public static function check_return(){
-        if(Auth::check()):
-            return 'home';
-        else:
-            return 'home_temp';
-        endif;
-    }
-
     public function index(Request $request)
     {
         $count = Board::count();
         $boards = BoardController::boards_DB($request->page);
-        $home = Test::check_return();
 
-        return view($home,[
+        return view('home',[
             'boards' => $boards,
             'title'  => 'Home',
             'count'  => $count,
@@ -34,7 +26,7 @@ class Test extends Controller
     }
 
     public function show(){
-        if(Auth::user() !=NULL){
+        if(Auth::check()){
             $item = User::find(Auth::user()->id);
             return view('show',['item' => $item]);
         }
