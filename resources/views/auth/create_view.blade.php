@@ -2,14 +2,11 @@
 
 @section("title",'新規アカウント作成')
 
-@section('header')
-@endsection
-
 @section('main')
     <form action = "create/add" class = "create_form" method = "POST" autocomplete="off">
         @csrf
         @method('post')
-        <h1>新規アカウント作成</h1>
+        <h1>アカウント作成</h1>
         <p>Name</p>
         <input type = "text" name = "name" maxlength ="20"　required
         placeholder = "Username" class = "@error('name') is-invalid @enderror">
@@ -23,7 +20,7 @@
             <p class = 'error'>{{ $message }}</p>
         @enderror
         <p>Password</p>
-        <input type = "password" name = "password" maxlength ="16"　required
+        <input type = "password" name = "password" maxlength ="16" minlength="8" required
         placeholder = "Password" class = "@error('password') is-invalid @enderror">
         @error('password')
             <p class = 'error'>{{ $message }}</p>
