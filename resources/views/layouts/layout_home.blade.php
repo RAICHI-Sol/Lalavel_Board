@@ -26,7 +26,6 @@
                     <div class = "menu">
                         <a href = {{route('profile_get',Auth::user()->id)}}><i class="far fa-address-card"></i>プロフィール</a>
                         <a href = {{route('set_prof')}}><i class="fas fa-user-cog"></i>設定</a>
-                        <a href = {{route('home_get')}}><i class="far fa-question-circle"></i>ヘルプ</a>
                         <a href = {{ route('logout') }} onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i>ログアウト</a>
@@ -45,6 +44,7 @@
             </div>
         </header>
         <main>
+            @yield('menu')
             @yield('main')
         </main>
         <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>

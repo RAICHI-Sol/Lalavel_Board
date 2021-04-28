@@ -1,8 +1,16 @@
 @inject('Test', 'App\Http\Controllers\Test')
 
-@extends('layouts/layout_setting')
+@extends('layouts/layout_home')
 
 @section("title",'設定')
+
+@section('menu')
+<div class = "setting_menu">
+    <h1>menu</h1>
+    <a href = "{{ route('set_prof') }}">プロフィール編集</a>
+    <a href = "{{ route('set_account') }}">アカウント設定</a>
+</div>
+@endsection
 
 @section('main')
 <div class = "setting">
