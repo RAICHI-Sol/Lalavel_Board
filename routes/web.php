@@ -24,6 +24,7 @@ Route::prefix('')->group(function(){
     Route::get('/',[Test::class,'index'])->name('home_get');
     Route::post('/', [HomeController::class, 'index'])->name('home');
     Route::get('/result', [BoardController::class, 'search'])->name('result');
+    Route::get('/gide',function(){return view('gide');})->name('gide');
 });
 
 //ボード作成クラス
@@ -42,10 +43,7 @@ Route::prefix('setting')->group(function(){
     Route::get('/profile',[ProfileController::class,'setting'])->name('set_prof');
     Route::put('/profile',[ProfileController::class,'update'])->name('setting');
 
-    Route::get('/account',function(){
-        return view('account');
-    })->name('set_account');
-
+    Route::get('/account',function(){return view('account');})->name('set_account');
     Route::delete('/account/destroy',[Test::class,'destroy'])->name('destroy');
 });
 
@@ -57,18 +55,13 @@ Route::prefix('login')->group(function(){
 
 //ログアウト処理でのグループ化
 Route::prefix('logout')->group(function(){
-    Route::get('/',function(){
-        return view('home');
-    });
+    Route::get('/',function(){return view('home');});
     Route::post('/',[LoginController::class,'logout'])->name('logout');
 });
 
 //アカウント作成処理でのグループ化
 Route::prefix('create')->group(function(){
-    Route::get('/',function(){
-        return view('Auth/create_view');
-    })->name('create');
-
+    Route::get('/',function(){return view('Auth/create_view');})->name('create');
     Route::post('/add',[Test::class,'create']);
 });
 
