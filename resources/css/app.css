@@ -165,6 +165,9 @@ header .header form.seach_form button {
 
 main {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   max-width: 1300px;
   margin: auto;
 }
@@ -176,11 +179,36 @@ main h1 {
   background-color: deeppink;
   padding: 5px;
   border-radius: 5px;
+  margin: 0px 0px 20px 0px;
+}
+
+main .setting_menu {
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  width: 20%;
+  max-height: 30vh;
+}
+
+main .setting_menu a {
+  display: block;
+  margin: 20px;
+  font-family: "Cherry Swash", cursive;
+  color: black;
+  font-size: 18px;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  text-decoration: none;
+  border-bottom: solid 1px silver;
+}
+
+main .setting_menu a:hover {
+  background: white;
 }
 
 main div {
   padding-bottom: 10px;
-  margin: auto;
+  margin: 20px auto;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
 }
@@ -210,6 +238,10 @@ main div.boards .board {
   width: 80%;
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s;
+}
+
+main div.boards .board label {
+  cursor: pointer;
 }
 
 main div.boards .board button {
@@ -243,6 +275,18 @@ main div.boards .comment .date {
   color: #6d6d6d;
 }
 
+main div.boards .comment h2 {
+  display: block;
+  border-bottom: solid 1px silver;
+  font-size: 20px;
+}
+
+main div.boards .comment p {
+  display: block;
+  margin: 10px;
+  color: #5a5a5a;
+}
+
 main div.boards .button_frame {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -257,40 +301,58 @@ main div.boards .button_frame button {
   margin: 5px;
   border: solid 2px silver;
   text-align: center;
+  cursor: pointer;
 }
 
-main div.make_board {
-  width: 60%;
+main div.make_board, main div.setting {
+  width: 50%;
 }
 
-main div.make_board form {
+main div.make_board p, main div.setting p {
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+main div.make_board p.red, main div.setting p.red {
+  color: #ca0303;
+}
+
+main div.make_board form, main div.setting form {
   width: 80%;
   margin: 10px auto;
 }
 
-main div.make_board form p {
-  font-weight: bold;
-  margin: 5px 5px;
+main div.make_board form label, main div.setting form label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-main div.make_board form input[type=text], main div.make_board form textarea {
+main div.make_board form input[type=text], main div.make_board form textarea, main div.make_board form select, main div.setting form input[type=text], main div.setting form textarea, main div.setting form select {
   font-family: "M PLUS 1p", cursive;
   color: black;
   font-size: 15px;
   display: block;
   border-radius: 10px;
   border: solid 1px white;
-  margin: 5px 10px 10px 5px;
-  width: 100%;
+  margin: 10px 20px;
+  width: 50%;
   height: 40px;
 }
 
-main div.make_board form textarea {
-  width: 100%;
+main div.make_board form select, main div.setting form select {
+  width: 30%;
+  height: 30px;
+}
+
+main div.make_board form textarea, main div.setting form textarea {
+  width: 90%;
   height: 160px;
 }
 
-main div.make_board form input[type=submit] {
+main div.make_board form input[type=submit], main div.setting form input[type=submit] {
   display: block;
   border-radius: 10px;
   border: solid 1px white;
@@ -303,8 +365,98 @@ main div.make_board form input[type=submit] {
   opacity: 0.85;
 }
 
-main div.make_board form input[type=submit]:hover {
+main div.make_board form input[type=submit]:hover, main div.setting form input[type=submit]:hover {
   opacity: 1;
+}
+
+main div.make_board form fieldset, main div.setting form fieldset {
+  border: 0px none;
+  border-radius: 10px;
+  background: cornsilk;
+}
+
+main div.make_board form fieldset legend, main div.setting form fieldset legend {
+  padding: 10px;
+  font-family: "M PLUS 1p", cursive;
+  color: white;
+  font-size: 17px;
+  background: deeppink;
+  border-radius: 10px;
+}
+
+main div.make_board form fieldset .radio_flame, main div.setting form fieldset .radio_flame {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main div.make_board form fieldset .radio_flame label, main div.setting form fieldset .radio_flame label {
+  display: block;
+  margin: 15px;
+}
+
+main div.setting {
+  margin: 20px auto 20px 20px;
+}
+
+main div.profile {
+  width: 50%;
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 17px;
+}
+
+main div.profile .besic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px auto;
+}
+
+main div.profile .besic .text {
+  display: block;
+  border-radius: 10px;
+  border: 0px none;
+  margin: 10px auto;
+  background-color: white;
+  width: 50%;
+  min-height: 30vh;
+}
+
+main div.profile .besic .text p {
+  display: block;
+  margin-left: 10%;
+  color: #5a5a5a;
+}
+
+main div.profile .besic .icon {
+  display: block;
+  border-radius: 10px;
+  border: dashed 1px silver;
+  margin: 10px auto;
+  width: 30%;
+  max-height: 30vh;
+}
+
+main div.profile .details {
+  display: block;
+  border-radius: 10px;
+  border: 0px none;
+  margin: 10px auto;
+  background-color: white;
+  width: 90%;
+  min-height: 30vh;
+}
+
+main div.profile .details p {
+  display: block;
+  margin: 10px;
+  color: #5a5a5a;
+}
+
+main div.profile .details h2 {
+  display: block;
+  border-bottom: solid 1px silver;
 }
 
 .login_form, .create_form {

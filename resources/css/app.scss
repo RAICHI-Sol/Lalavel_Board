@@ -137,6 +137,7 @@ header{
 
 main{
     position:relative;
+    display: flex;
     max-width: 1300px;
     margin:auto;
     h1{
@@ -144,10 +145,29 @@ main{
         background-color:deeppink;
         padding:5px;
         border-radius:5px;
+        margin:0px 0px 20px 0px;
+    }
+    .setting_menu{
+        margin:20px;
+        background-color:rgba(255, 255, 255, 0.6);
+        border-radius:5px;
+        width:20%;
+        max-height:30vh;
+        a{
+            display: block;
+            margin:20px;
+            @include font('Cherry Swash',black,18px);
+            transition-duration:0.5s;
+            text-decoration: none;
+            border-bottom:solid 1px silver;
+        }
+        a:hover{
+            background:white;
+        }
     }
     div{
         padding-bottom:10px;
-        margin:auto;
+        margin:20px auto;
         background-color:rgba(255, 255, 255, 0.6);
         border-radius:5px;
         &.saccess{
@@ -167,6 +187,9 @@ main{
                 padding:10px;
                 width:80%;
                 transition-duration:0.5s;
+                label{
+                    cursor:pointer;
+                }
                 button{
                     display: none;
                 }
@@ -190,6 +213,16 @@ main{
                     font-size:10px;
                     color: rgb(109, 109, 109);
                 }
+                h2{
+                    display: block;
+                    border-bottom:solid 1px silver;
+                    font-size: 20px;
+                }
+                p{
+                    display: block;
+                    margin:10px;
+                    color:rgb(90, 90, 90);
+                }
             }
             .button_frame{
                 display: flex;
@@ -201,25 +234,35 @@ main{
                     margin:5px;
                     border:solid 2px silver;
                     text-align: center;
+                    cursor:pointer;
                 }
             }
         }
-        &.make_board{
-            width:60%;
+        &.make_board,&.setting{
+            width:50%;
+            p{
+                @include font('M PLUS 1p', black,15px);
+                font-weight:bold;
+                &.red{
+                    color: rgb(202, 3, 3);
+                }
+            }
             form{
                 width:80%;
                 margin:10px auto;
-                p{
-                    font-weight: bold;
-                    margin:5px 5px;
+                label{
+                    display: flex;
                 }
-                input[type = text],textarea{
+                input[type = text],textarea,select{
                     @include font('M PLUS 1p', black,15px);
-                    @include flame(10px,solid 1px white,5px 10px 10px 5px);
-                    @include width_height(100%,40px);
+                    @include flame(10px,solid 1px white,10px 20px);
+                    @include width_height(50%,40px);
+                }
+                select{
+                    @include width_height(30%,30px);
                 }
                 textarea{
-                    @include width_height(100%,160px);
+                    @include width_height(90%,160px);
                 }
                 input[type = submit]{
                     @include flame(10px,solid 1px white,10px auto);
@@ -231,6 +274,66 @@ main{
                     &:hover{
                         opacity:1;
                     }
+                }
+                fieldset{
+                    border:0px none;
+                    border-radius:10px;
+                    background:cornsilk;
+                    legend{
+                        padding:10px;
+                        @include font('M PLUS 1p', white,17px);
+                        background:deeppink;
+                        border-radius:10px;
+                    }
+                    .radio_flame{
+                        display: flex;
+                        label{
+                            display: block;
+                            margin:15px;
+                        }
+                    }
+                }
+            }
+        }
+        &.setting{
+            margin:20px auto 20px 20px;
+        }
+        &.profile{
+            width:50%;
+            @include font('M PLUS 1p', black,17px);
+            .besic{
+                display: flex;
+                margin:10px auto;
+                .text{
+                    @include flame(10px,0px none,10px auto);
+                    background-color:white;
+                    width:50%;
+                    min-height:30vh;
+                    p{
+                        display: block;
+                        margin-left:10%;
+                        color: rgb(90, 90, 90);
+                    }
+                }
+                .icon{
+                    @include flame(10px,dashed 1px silver,10px auto);
+                    width:30%;
+                    max-height:30vh;
+                }
+            }
+            .details{
+                @include flame(10px,0px none,10px auto);
+                background-color:white;
+                width:90%;
+                min-height:30vh;
+                p{
+                    display: block;
+                    margin:10px;
+                    color:rgb(90, 90, 90);
+                }
+                h2{
+                    display: block;
+                    border-bottom:solid 1px silver;
                 }
             }
         }
