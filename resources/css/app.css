@@ -213,6 +213,14 @@ main div {
   border-radius: 5px;
 }
 
+main div.gide {
+  width: 90%;
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 14px;
+  padding: 10px;
+}
+
 main div.saccess {
   width: 50%;
   text-align: center;
@@ -226,6 +234,7 @@ main div.saccess a {
 
 main div.boards {
   width: 50%;
+  margin: 20px auto 20px 20px;
 }
 
 main div.boards .board {
@@ -575,5 +584,19 @@ th {
 
 .space {
   margin-right: 20px;
+}
+
+p.gide {
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 15px;
+  margin: 10px 20px;
+}
+
+h3 {
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 20px;
+  margin: 10px;
 }
 /*# sourceMappingURL=app.css.map */
