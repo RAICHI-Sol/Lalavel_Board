@@ -1,6 +1,6 @@
 @extends('layouts/layout_home')
 
-@section("title",'Mypage')
+@section("title",'ボードの作成')
 
 @section('main')
 <div class = "make_board">

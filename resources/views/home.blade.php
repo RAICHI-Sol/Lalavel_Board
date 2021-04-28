@@ -13,7 +13,8 @@
                 <label for = "board{{$board->id}}">
                     <p class = "date">
                         投稿日：{{$board->created_at}}
-                        <span class = "space"></span>投稿者：{{$board->name}}
+                        <span class = "space"></span>
+                        <a href = {{route('profile_get',$board->create_userid)}}>投稿者：{{$board->name}}</a>
                     </p>
                     <p>{{$board->board_name}}</p>
                     <button onclick = "location.href = './board/{{$board->id}}'" id = "board{{$board->id}}"></button>
