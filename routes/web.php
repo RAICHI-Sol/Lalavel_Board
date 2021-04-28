@@ -61,7 +61,7 @@ Route::prefix('logout')->group(function(){
 
 //アカウント作成処理でのグループ化
 Route::prefix('create')->group(function(){
-    Route::get('/',function(){return view('Auth/create_view');})->name('create');
+    Route::get('/',function(){return view('create_view');})->name('create');
     Route::post('/add',[Test::class,'create']);
 });
 
