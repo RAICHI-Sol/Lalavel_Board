@@ -45,6 +45,11 @@
             </div>
         </header>
         <main>
+            <div class = "setting_menu">
+                <h1>menu</h1>
+                <a href = "{{ route('set_prof') }}">プロフィール編集</a>
+                <a href = "{{ route('set_account') }}">アカウント設定</a>
+            </div>
             @yield('main')
         </main>
         <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
