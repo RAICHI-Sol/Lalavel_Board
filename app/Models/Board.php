@@ -9,4 +9,10 @@ class Board extends Model
 {
     use HasFactory;
     protected $table = 'Board';
+
+    protected $fillable = [
+        'board_name',
+        'create_userid',
+        'watcher',
+    ];
 }

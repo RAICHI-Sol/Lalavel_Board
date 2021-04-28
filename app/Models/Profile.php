@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BoardComment extends Model
+class Profile extends Model
 {
     use HasFactory;
-    protected $table = 'board_comment';
-    public $timestamps = false;
+    protected $table = 'profile';
 
     protected $fillable = [
-        'board_id',
-        'comment',
-        'tag_id',
+        'userid',
+        'sex',
+        'from',
+        'old',
+        'job',
+        'profile',
     ];
 }
