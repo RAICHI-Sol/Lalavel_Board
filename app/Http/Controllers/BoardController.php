@@ -12,14 +12,16 @@ use App\Models\BoardComment;
 class BoardController extends Controller
 {
     public static function boards_DB($offset = 0){
-        return Board::select('board.id','board.created_at','users.name','board.board_name','board.watcher')
+        return Board::select('board.id','board.created_at','users.name','board.create_userid',
+        'board.board_name','board.watcher')
         ->join('users','users.id','=','board.create_userid')
         ->latest()->offset($offset * 5)
         ->limit(5)->get();   
     }
 
     public static function boards_DB_search($search,$offset = 0){
-        return Board::select('board.id','board.created_at','users.name','board.board_name','board.watcher')
+        return Board::select('board.id','board.created_at','users.name','board.create_userid',
+        'board.board_name','board.watcher')
         ->join('users','users.id','=','board.create_userid')
         ->where('board.board_name','like','%'.$search.'%')
         ->latest()->offset($offset * 5)
@@ -42,7 +44,8 @@ class BoardController extends Controller
 
     public function show($id){
 
-        $boards = Board::select('board.id','board.created_at','users.name','board.board_name','board_comment.comment')
+        $boards = Board::select('board.id','board.created_at','users.name','board.create_userid',
+        'board.board_name','board_comment.comment')
         ->join('users','users.id','=','board.create_userid')
         ->join('board_comment','board_comment.board_id','=','board.id')
         ->find($id);
@@ -60,10 +63,11 @@ class BoardController extends Controller
         $newBoard->save();
 
         $newBoardComment = new BoardComment();
-        $newBoardComment->board_id = $newBoard->id;
-        $newBoardComment->comment = $request->comment;
-        $newBoardComment->tag_id  = 1;
-        $newBoardComment->save();
+        $newBoardComment->create([
+            'board_id' =>$newBoard->id,
+            'comment'  =>$request->comment,
+            'tag_id'   =>1,
+        ]);
 
         $count = Board::count();
 
