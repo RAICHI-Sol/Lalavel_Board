@@ -15,4 +15,14 @@ class Board extends Model
         'create_userid',
         'watcher',
     ];
+
+    Public function user()
+    {
+      return $this->belongsTo('App\Models\User','create_userid');
+    }
+
+    Public function comment()
+    {
+      return $this->hasOne('App\Models\BoardComment','board_id');
+    }
 }
