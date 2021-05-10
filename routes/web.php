@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Test;
 
 /*
@@ -63,6 +64,11 @@ Route::prefix('logout')->group(function(){
 Route::prefix('create')->group(function(){
     Route::get('/',function(){return view('create_view');})->name('create');
     Route::post('/add',[Test::class,'create']);
+});
+
+Route::prefix('chat')->group(function(){
+    Route::get('{id}', [ChatController::class, 'show'])->name('chat');
+    Route::post('{id}', [ChatController::class, 'add'])->name('message');
 });
 
 Route::get('/board/{id}', [BoardController::class, 'show']);
