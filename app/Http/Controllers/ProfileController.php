@@ -10,18 +10,18 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     public function show($id){
-        $profile = User::join('profile','users.id','=','profile.userid')->find($id);
-        return view('profile',['profile'=>$profile]);
+        $user = User::find($id);
+        return view('profile',['user'=>$user]);
     }
 
     public function setting(){
-        $id = Auth::user()->id;
-        $profile = User::join('profile','users.id','=','profile.userid')->find($id);
-        return view('setting',['profile'=>$profile]);
+        $id = Auth::id();
+        $user = User::find($id);
+        return view('setting',['user'=>$user]);
     }
 
     public function update(Request $request){
-        $id = Auth::user()->id;
+        $id = Auth::id();
 
         $user = User::find($id);
         $user->name = $request->name;
@@ -35,12 +35,10 @@ class ProfileController extends Controller
             'old' => $request->old,
             'job' => $request->job,
             'profile' => $request->profile,
-        ]);
+        ])->save();
 
-        $profile->save();
+        $user = User::find($id);
 
-        $profile = User::join('profile','users.id','=','profile.userid')->find($id);
-
-        return view('setting',['profile'=>$profile]);
+        return view('setting',['user'=>$user]);
     }
 }

@@ -28,7 +28,7 @@ class Test extends Controller
 
     public function show(){
         if(Auth::check()){
-            $item = User::find(Auth::user()->id);
+            $item = User::find(Auth::id());
             return view('show',['item' => $item]);
         }
         else{
@@ -38,10 +38,11 @@ class Test extends Controller
 
     public function create(Request $request){
         $user = new User();
-        $user->name  = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        $user->fill([
+            'name'  => $request->name,
+            'email' => $request->email,
+            'password'=>Hash::make($request->password),
+        ])->save();
 
         $profile = new Profile();
 
@@ -54,7 +55,7 @@ class Test extends Controller
     }
     public function destroy()
     {
-        $userid = Auth::user()->id;
+        $userid = Auth::id();
         $boards = Board::where('create_userid',$userid)->get();
         for($i = 0;$i < $boards->count();$i++){
             BoardComment::where('board_id',$boards[$i]->id)->delete();

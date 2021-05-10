@@ -12,18 +12,12 @@ use App\Models\BoardComment;
 class BoardController extends Controller
 {
     public static function boards_DB($offset = 0){
-        return Board::select('board.id','board.created_at','users.name','board.create_userid',
-        'board.board_name','board.watcher')
-        ->join('users','users.id','=','board.create_userid')
-        ->latest()->offset($offset * 5)
+        return Board::latest()->offset($offset * 5)
         ->limit(5)->get();   
     }
 
     public static function boards_DB_search($search,$offset = 0){
-        return Board::select('board.id','board.created_at','users.name','board.create_userid',
-        'board.board_name','board.watcher')
-        ->join('users','users.id','=','board.create_userid')
-        ->where('board.board_name','like','%'.$search.'%')
+        return Board::where('board.board_name','like','%'.$search.'%')
         ->latest()->offset($offset * 5)
         ->limit(5)->get();   
     }
@@ -32,7 +26,7 @@ class BoardController extends Controller
         
         $count = Board::where('board.board_name','like','%'.$request->search.'%')->count();
         
-        $boards = BoardController::boards_DB_search($request->search,$request->page);
+        $boards = $this->boards_DB_search($request->search,$request->page);
 
         return view('home',[
             'boards' => $boards,
@@ -43,24 +37,17 @@ class BoardController extends Controller
     }
 
     public function show($id){
-
-        $boards = Board::select('board.id','board.created_at','users.name','board.create_userid',
-        'board.board_name','board_comment.comment')
-        ->join('users','users.id','=','board.create_userid')
-        ->join('board_comment','board_comment.board_id','=','board.id')
-        ->find($id);
-
-        return view('board',[
-            'boards' => $boards,
-        ]);
+        $boards = Board::find($id);
+        return view('board',['boards' => $boards,]);
     }
 
     public function create(Request $request){
         $newBoard = new Board();
-        $newBoard->board_name    = $request->board_name;
-        $newBoard->create_userid = Auth::user()->id;
-        $newBoard->watcher = 0;
-        $newBoard->save();
+        $newBoard->fill([
+            'board_name'=>$request->board_name,
+            'create_userid'=>Auth::id(),
+            'watcher'=>0,
+        ])->save();
 
         $newBoardComment = new BoardComment();
         $newBoardComment->create([
@@ -71,7 +58,7 @@ class BoardController extends Controller
 
         $count = Board::count();
 
-        $boards = BoardController::boards_DB();
+        $boards = $this->boards_DB();
 
         return view('home',[
             'boards' => $boards,
