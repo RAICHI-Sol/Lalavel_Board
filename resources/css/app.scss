@@ -16,6 +16,11 @@
     margin:$margin;
 }
 
+@mixin a_line($color){
+    color:$color;
+    text-decoration:none;
+}
+
 *{
     box-sizing: border-box;
 }
@@ -39,6 +44,7 @@ header{
     position: relative;
     padding:10px 0px;
     @include width_height(100%,10%);
+    @include font('M PLUS 1p', white,15px);
     margin:0;
     background: deeppink;
     .header{
@@ -62,7 +68,7 @@ header{
             z-index:1;
             transition-duration:0.5s;
             a{
-                @include font('Cherry Swash',black,15px);
+                @include font('M PLUS 1p',black,15px);
                 transition-duration:0.5s;
             }
             a:hover{
@@ -75,9 +81,9 @@ header{
             cursor: pointer;
             font-size: 18px;
             i{
-                margin-left: 10px;
                 vertical-align:middle;
                 font-size: 40px;
+                margin-left: 10px;
                 transition-duration:0.5s;
                 &:hover{
                     color: rgb(190, 190, 190);
@@ -93,13 +99,11 @@ header{
         p{
             display:block;
             text-align:right;
-            @include font("M PLUS 1p", white,15px);
             font-weight:Medium;
             margin:5px;
         }
         i{
             font-size:20px;
-            margin-right:10px;
         }
         a{
             display: block;
@@ -112,7 +116,7 @@ header{
                 background: rgb(19, 184, 19);
                 padding-top:10px;
                 vertical-align: middle;
-                @include font('Cherry Swash', white,15px);
+                color: white;
                 &:hover{
                     background: rgb(23, 226, 23);
                 }
@@ -156,7 +160,7 @@ main{
         a{
             display: block;
             margin:20px;
-            @include font('Cherry Swash',black,18px);
+            @include font('M PLUS 1p',black,18px);
             transition-duration:0.5s;
             text-decoration: none;
             border-bottom:solid 1px silver;
@@ -170,9 +174,11 @@ main{
         margin:20px auto;
         background-color:rgba(255, 255, 255, 0.6);
         border-radius:5px;
+        font-family: 'M PLUS 1p',cursive;
         &.gide{
             width: 90%;
-            @include font('M PLUS 1p',black,14px);
+            color: black;
+            font-size: 14px;
             padding:10px;
         }
         &.saccess{
@@ -180,8 +186,7 @@ main{
             text-align: center;
             a{
                 background-color: silver;
-                color: white;
-                text-decoration: none;
+                @include a_line(white);
             }
         }
         &.boards{
@@ -214,6 +219,7 @@ main{
                 background-color:white;
                 padding:10px;
                 width:90%;
+                min-height:40vh;
                 .date{
                     margin:0 0 10px 0;
                     font-size:10px;
@@ -223,11 +229,40 @@ main{
                     display: block;
                     border-bottom:solid 1px silver;
                     font-size: 20px;
+                    margin:20px 10px;
                 }
                 p{
                     display: block;
-                    margin:10px;
+                    margin:20px;
                     color:rgb(90, 90, 90);
+                    &.right{
+                        text-align: right;
+                    }
+                }
+                .message{
+                    margin:10px;
+                    border-radius: 10px;
+                    background:rgb(228, 228, 228);
+                    max-width:50vh;
+                    min-width:10vh;
+                    padding:8px;
+                    &.mine{
+                        background:rgb(1, 148, 233);
+                        color: white;
+                    }
+                }
+                .contact{
+                    display: block;
+                    @include flame(10px,0px none,20px auto 10px auto);
+                    @include a_line(white);
+                    width:40%;
+                    padding:10px 0px;
+                    text-align: center;
+                    background: deeppink;
+                    transition-duration: 0.5s;
+                    &:hover{
+                        background: rgb(255, 82, 174);
+                    }
                 }
             }
             .button_frame{
@@ -251,53 +286,6 @@ main{
                 font-weight:bold;
                 &.red{
                     color: rgb(202, 3, 3);
-                }
-            }
-            form{
-                width:80%;
-                margin:10px auto;
-                label{
-                    display: flex;
-                }
-                input[type = text],textarea,select{
-                    @include font('M PLUS 1p', black,15px);
-                    @include flame(10px,solid 1px white,10px 20px);
-                    @include width_height(50%,40px);
-                }
-                select{
-                    @include width_height(30%,30px);
-                }
-                textarea{
-                    @include width_height(90%,160px);
-                }
-                input[type = submit]{
-                    @include flame(10px,solid 1px white,10px auto);
-                    background-color: deeppink;
-                    color: white;
-                    padding:10px 20px;
-                    transition-duration:0.6s;
-                    opacity:0.85;
-                    &:hover{
-                        opacity:1;
-                    }
-                }
-                fieldset{
-                    border:0px none;
-                    border-radius:10px;
-                    background:cornsilk;
-                    legend{
-                        padding:10px;
-                        @include font('M PLUS 1p', white,17px);
-                        background:deeppink;
-                        border-radius:10px;
-                    }
-                    .radio_flame{
-                        display: flex;
-                        label{
-                            display: block;
-                            margin:15px;
-                        }
-                    }
                 }
             }
         }
@@ -343,10 +331,65 @@ main{
                 }
             }
         }
+        form,.form{
+            width:80%;
+            margin:10px auto;
+            label{
+                display: flex;
+            }
+            input[type = text],textarea,select{
+                @include font('M PLUS 1p', black,15px);
+                @include flame(10px,solid 1px white,10px 20px);
+                @include width_height(50%,40px);
+            }
+            select{
+                @include width_height(30%,30px);
+            }
+            textarea{
+                @include width_height(90%,160px);
+                resize: vertical;
+            }
+            input[type = submit]{
+                @include flame(10px,solid 1px white,10px auto);
+                background-color: deeppink;
+                color: white;
+                padding:10px 20px;
+                transition-duration:0.6s;
+                opacity:0.85;
+                &:hover{
+                    opacity:1;
+                }
+            }
+            fieldset{
+                border:0px none;
+                border-radius:10px;
+                background:cornsilk;
+                legend{
+                    padding:10px;
+                    @include font('M PLUS 1p', white,17px);
+                    background:deeppink;
+                    border-radius:10px;
+                }
+                .radio_flame{
+                    display: flex;
+                    label{
+                        display: block;
+                        margin:15px;
+                    }
+                }
+            }
+        }
+        .form{
+            display: flex;
+            textarea{
+                @include width_height(80%,40px);
+            }
+        }
     }
 }
 
 .login_form,.create_form{
+    display:block;
     position: relative;
     background-color:rgba(255, 255, 255, 0.6);
     top:50px;
@@ -355,6 +398,7 @@ main{
     padding:0 10px 10px 10px;
     border-radius:10px;
     transition-duration:0.6s;
+    font-family:'M PLUS 1p',cursive;
     input[type = email],input[type = password],input[type = text]{
         @include width_height(75%,40px);
         @include flame(10px,solid 1px white,5px auto 10px auto);
@@ -396,8 +440,7 @@ main{
     a{
         display: block;
         margin:10px auto;
-        color: blue;
-        text-decoration:none;
+        @include a_line(blue);
         text-align: center;
         width:50%;
         opacity: 0.7;
@@ -407,6 +450,9 @@ main{
     }
     @media (max-width:768px){
         width:50%;
+    }
+    @media (max-width:420px){
+        width:70%;
     }
 }
 
@@ -447,4 +493,9 @@ p.gide{
 h3{
     @include font('M PLUS 1p',black,20px);
     margin:10px;
+}
+
+i{
+    margin-right:10px;
+    font-size: 30px;
 }
