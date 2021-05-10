@@ -18,4 +18,9 @@ class Profile extends Model
         'job',
         'profile',
     ];
+
+    Public function user()
+    {
+      return $this->hasOne('App\Models\User','userid');
+    }
 }
