@@ -22,7 +22,7 @@
                     <p class = "date">
                         投稿日：{{$board->created_at}}
                         <span class = "space"></span>
-                        <a href = {{route('profile_get',$board->create_userid)}}>投稿者：{{$board->name}}</a>
+                        <a href = {{route('profile_get',$board->create_userid)}}>投稿者：{{$board->user->name}}</a>
                     </p>
                     <p>{{$board->board_name}}</p>
                     <button onclick = "location.href = './board/{{$board->id}}'" id = "board{{$board->id}}"></button>
