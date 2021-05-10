@@ -3,12 +3,13 @@
 <html>
     <head>
         <meta charset = "UTF-8">
-        <meta name = "viewport" >
         <meta http-equiv="X-UA-Compatible" content="ie = edge">
         <link rel = "stylesheet" href = "{{ secure_asset('app.css')}}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="https://fonts.googleapis.com/css?family=Cherry+Swash:700" rel="stylesheet">
         <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
         <title>@yield('title')</title>
     </head>
     <body class = "home">
@@ -21,10 +22,10 @@
                 </form>
                 @if(Auth::check())
                     <a href = {{route('make_get')}} class = "make_board"><i class="fas fa-edit"></i>投稿する</a>
-                    <label for = "menu">{{Auth::user()->name}}さん<i class = "fas fa-user-circle"></i></label>
+                    <label for = "menu">{{Auth::user()->name}}<i class = "fas fa-user-circle"></i></label>
                     <input type="checkbox" id = "menu">
                     <div class = "menu">
-                        <a href = {{route('profile_get',Auth::user()->id)}}><i class="far fa-address-card"></i>プロフィール</a>
+                        <a href = {{route('profile_get',Auth::id())}}><i class="far fa-address-card"></i>プロフィール</a>
                         <a href = {{route('set_prof')}}><i class="fas fa-user-cog"></i>設定</a>
                         <a href = {{ route('logout') }} onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
@@ -49,4 +50,5 @@
         </main>
         <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
     </body>
+    @yield('script')
 </html>
