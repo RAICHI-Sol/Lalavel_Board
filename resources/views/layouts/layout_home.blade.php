@@ -25,7 +25,7 @@
                     <label for = "menu">{{Auth::user()->name}}<i class = "fas fa-user-circle"></i></label>
                     <input type="checkbox" id = "menu">
                     <div class = "menu">
-                        <a href = {{route('profile_get',Auth::id())}}><i class="far fa-address-card"></i>プロフィール</a>
+                        <a href = {{route('profile_get',Auth::id())}}><i class="far fa-address-card"></i>マイページ</a>
                         <a href = {{route('set_prof')}}><i class="fas fa-user-cog"></i>設定</a>
                         <a href = {{ route('logout') }} onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
@@ -49,6 +49,8 @@
             @yield('main')
         </main>
         <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
+        @yield('fixed')
     </body>
+    <script src = /laravel/resources/js/scroll.js></script>
     @yield('script')
 </html>
