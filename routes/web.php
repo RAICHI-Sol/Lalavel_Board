@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\Test;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +21,17 @@ use App\Http\Controllers\Test;
 
 //ホーム画面でのグループ化
 Route::prefix('')->group(function(){
-    Route::get('/',[Test::class,'index'])->name('home_get');
+    Route::get('/',[BoardController::class,'index'])->name('home_get');
     Route::post('/', [HomeController::class, 'index'])->name('home');
     Route::get('/result', [BoardController::class, 'search'])->name('result');
     Route::get('/gide',function(){return view('gide');})->name('gide');
+    Route::put('/update',[BoardController::class,'update']);
+    Route::delete('/delete',[BoardController::class, 'delete']);
 });
 
 //ボード作成クラス
 Route::prefix('make')->group(function(){
-    Route::get('/',[Test::class,'make_form'])->name('make_get');
+    Route::get('/',function(){return view('make');})->name('make_get')->middleware('auth');
     Route::post('/',[BoardController::class, 'create'])->name('make');
 });
 
@@ -41,11 +42,11 @@ Route::prefix('profile')->group(function(){
 
 //設定関連のグループ化
 Route::prefix('setting')->group(function(){
-    Route::get('/profile',[ProfileController::class,'setting'])->name('set_prof');
+    Route::get('/profile',[ProfileController::class,'setting'])->name('set_prof')->middleware('auth');
     Route::put('/profile',[ProfileController::class,'update'])->name('setting');
 
-    Route::get('/account',function(){return view('account');})->name('set_account');
-    Route::delete('/account/destroy',[Test::class,'destroy'])->name('destroy');
+    Route::get('/account',function(){return view('account');})->name('set_account')->middleware('auth');
+    Route::delete('/account/destroy',[UserController::class,'destroy'])->name('destroy');
 });
 
 //ログイン処理でのグループ化
@@ -62,12 +63,12 @@ Route::prefix('logout')->group(function(){
 
 //アカウント作成処理でのグループ化
 Route::prefix('create')->group(function(){
-    Route::get('/',function(){return view('create_view');})->name('create');
-    Route::post('/add',[Test::class,'create']);
+    Route::get('/',function(){return view('Auth/create_view');})->name('create');
+    Route::post('/add',[UserController::class,'create']);
 });
 
 Route::prefix('chat')->group(function(){
-    Route::get('{id}', [ChatController::class, 'show'])->name('chat');
+    Route::get('{id}', [ChatController::class, 'show'])->name('chat')->middleware('auth');
     Route::post('{id}', [ChatController::class, 'add'])->name('message');
 });
 
