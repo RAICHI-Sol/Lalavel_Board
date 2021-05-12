@@ -7,7 +7,7 @@ $(function(){
         id      = $('#id').val();
         target  = $('#target').val();
 
-        var url = 'chat'+id;
+        var url = '/chat/'+id;
         var data = {
             "target":target,
             "message":message,
@@ -25,7 +25,7 @@ $(function(){
         job      = $('select[name="job"]').val();
         profile  = $('textarea[name="profile"]').val();
 
-        var url  = 'setting/profile'
+        var url  = '/setting/profile'
         var data = {
             "name":username,
             "sex":sex,

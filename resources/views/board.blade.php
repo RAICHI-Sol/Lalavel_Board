@@ -11,7 +11,7 @@
 @endsection
 
 @section('main')
-<script src = /laravel/resources/js/make_board.js></script>
+<script src = "{{ secure_asset('js/make_board.js')}}"></script>
 <div class = "boards">
     <?php
         $comment = str_replace("\n","<br>",$boards->comment->comment);

@@ -37,7 +37,7 @@
         @endif
     </article>
     <div class = "chat_box">
-        <input type = "hidden" id = "id" value = {{$board->create_userid}}>
+        <input type = "hidden" id = "id" value = {{$board->id}}>
         <input type = "hidden" name = "target" id = "target" value = "{{$target}}">
         <textarea placeholder = "メッセージを入力" name = "message" required></textarea>
         <input type="submit" id ="submit" value = "送信">
@@ -45,5 +45,5 @@
 </div>
 @endsection
 @section('script')
-    <script src = "{{ secure_asset('main.js')}}"></script>    
+    <script src = "{{ secure_asset('js/main.js')}}"></script>
 @endsection

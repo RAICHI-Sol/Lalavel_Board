@@ -51,6 +51,6 @@
         <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
         @yield('fixed')
     </body>
-    <script src = /laravel/resources/js/scroll.js></script>
+    <script src = "{{ secure_asset('js/scroll.js')}}"></script>
     @yield('script')
 </html>

@@ -13,7 +13,7 @@
 @endsection
 
 @section('main')
-<script src = /laravel/resources/js/make_board.js></script>
+<script src = "{{ secure_asset('js/make_board.js')}}"></script>
 <div class = "boards">
     <h1>{{$title}}</h1>
     @if($boards->isEmpty())
