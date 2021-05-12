@@ -1,3 +1,12 @@
+/*******************************************
+variable
+*******************************************/
+/*******************************************
+@mixin
+*******************************************/
+/*******************************************
+html,boby
+*******************************************/
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -19,6 +28,192 @@ body.home {
   min-height: 100vh;
 }
 
+body .success_comment {
+  display: block;
+  margin: 0;
+  position: fixed;
+  background: deeppink;
+  color: white;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  -webkit-animation-name: "fadeIn";
+          animation-name: "fadeIn";
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body .fixed {
+  display: none;
+  margin: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+body .fixed.on {
+  display: block;
+}
+
+body .fixed .head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: "M PLUS 1p", cursive;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 0px none;
+  background: deeppink;
+}
+
+body .fixed .head .fa-times {
+  display: block;
+  margin-left: auto;
+  font-size: 25px;
+  color: black;
+  background: white;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+body .fixed .head .fa-times:hover {
+  color: white;
+  background: #c72525;
+}
+
+body .fixed .box, body .fixed .editbox {
+  top: 40%;
+  position: relative;
+  width: 30%;
+  background: #ffd6d6;
+  margin: auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
+  height: 20%;
+  text-align: center;
+}
+
+body .fixed .box button, body .fixed .editbox button {
+  font-family: "M PLUS 1p", cursive;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 0px none;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+body .fixed .box button#OK, body .fixed .editbox button#OK {
+  background: #c72525;
+}
+
+body .fixed .box button#NO, body .fixed .editbox button#NO {
+  background: #38b3e4;
+}
+
+body .fixed .editbox {
+  width: 50%;
+  background: #ffd6d6;
+  margin: auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
+  height: 60%;
+  top: 20%;
+}
+
+body .fixed .editbox input[type=text], body .fixed .editbox textarea {
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 15px;
+  display: block;
+  margin: 10px 20px;
+  border-radius: 10px;
+  border: solid 1px white;
+  width: 50%;
+  height: 40px;
+}
+
+body .fixed .editbox textarea {
+  width: 90%;
+  height: 160px;
+  resize: vertical;
+  white-space: pre-wrap;
+}
+
+body .fixed .editbox input[type=submit] {
+  display: block;
+  margin: 10px auto;
+  border-radius: 10px;
+  border: 0px none;
+  background-color: deeppink;
+  color: white;
+  padding: 10px 20px;
+  -webkit-transition-duration: 0.6s;
+          transition-duration: 0.6s;
+  opacity: 0.85;
+}
+
+body .fixed .editbox input[type=submit]:hover {
+  opacity: 1;
+}
+
+/*******************************************
+other
+*******************************************/
+.space {
+  margin-right: 20px;
+}
+
+p.gide_text {
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 15px;
+  margin: 10px 20px;
+}
+
+h3 {
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 20px;
+  margin: 10px;
+}
+
+i {
+  margin-right: 10px;
+  font-size: 30px;
+}
+
+/*******************************************
+header
+*******************************************/
 header {
   position: relative;
   padding: 10px 0px;
@@ -29,6 +224,15 @@ header {
   font-size: 15px;
   margin: 0;
   background: deeppink;
+}
+
+header.scroll {
+  position: fixed;
+  z-index: 3;
+  padding: 10px 0px;
+  height: 12%;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
 }
 
 header .header {
@@ -48,6 +252,38 @@ header .header h1 a {
   font-family: "Cherry Swash", cursive;
   color: white;
   font-size: 30px;
+}
+
+header .header p {
+  display: block;
+  margin: 5px;
+  text-align: right;
+  font-weight: Medium;
+}
+
+header .header i {
+  font-size: 20px;
+}
+
+header .header a {
+  display: block;
+  margin: 0 10px;
+  padding: 5px 10px;
+  text-decoration: none;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
+header .header a.make_board {
+  border-radius: 10px;
+  background: #13b813;
+  padding-top: 10px;
+  vertical-align: middle;
+  color: white;
+}
+
+header .header a.make_board:hover {
+  background: #17e217;
 }
 
 header .header .menu {
@@ -101,38 +337,6 @@ header .header input[type=checkbox]:checked + .menu {
   display: block;
 }
 
-header .header p {
-  display: block;
-  text-align: right;
-  font-weight: Medium;
-  margin: 5px;
-}
-
-header .header i {
-  font-size: 20px;
-}
-
-header .header a {
-  display: block;
-  margin: 0 10px;
-  padding: 5px 10px;
-  text-decoration: none;
-  -webkit-transition-duration: 0.5s;
-          transition-duration: 0.5s;
-}
-
-header .header a.make_board {
-  border-radius: 10px;
-  background: #13b813;
-  padding-top: 10px;
-  vertical-align: middle;
-  color: white;
-}
-
-header .header a.make_board:hover {
-  background: #17e217;
-}
-
 header .header form.seach_form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -143,23 +347,26 @@ header .header form.seach_form {
 
 header .header form.seach_form input[type=search] {
   display: block;
+  margin: 0;
   border-radius: 3px 0px 0px 3px;
   border: solid 1px silver;
-  margin: 0;
   width: 400px;
 }
 
 header .header form.seach_form button {
   display: block;
+  margin: 0;
   border-radius: 0px 3px 3px 0px;
   border: solid 1px silver;
-  margin: 0;
   font-family: "M PLUS 1p", cursive;
   color: black;
   font-size: 20px;
   cursor: pointer;
 }
 
+/*******************************************
+main
+*******************************************/
 main {
   position: relative;
   display: -webkit-box;
@@ -167,6 +374,10 @@ main {
   display: flex;
   max-width: 1300px;
   margin: auto;
+}
+
+main.scroll {
+  padding-top: 70px;
 }
 
 main h1 {
@@ -203,42 +414,87 @@ main .setting_menu a:hover {
   background: white;
 }
 
-main div {
-  padding-bottom: 10px;
-  margin: 20px auto;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 5px;
-  font-family: 'M PLUS 1p',cursive;
-}
-
-main div.gide {
+main .gide, main .subcomment {
   width: 90%;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 20px auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
   color: black;
   font-size: 14px;
   padding: 10px;
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 15px;
 }
 
-main div.saccess {
+main .subcomment {
+  white-space: pre-wrap;
+}
+
+main .saccess {
   width: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 20px auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
   text-align: center;
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 15px;
 }
 
-main div.saccess a {
-  background-color: silver;
+main .saccess a {
+  display: block;
+  margin: auto;
+  background: deeppink;
+  border-radius: 5px;
+  padding: 10px;
+  width: 30%;
   color: white;
   text-decoration: none;
 }
 
-main div.boards {
+main .boards {
   width: 50%;
+  background: rgba(255, 255, 255, 0.6);
   margin: 20px auto 20px 20px;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
 }
 
-main div.boards .board {
+main .boards i {
+  z-index: 1;
+}
+
+main .boards i.blue {
+  color: #38b3e4;
+}
+
+main .boards i.red {
+  color: #c72525;
+}
+
+main .boards i:hover {
+  opacity: 0.6;
+}
+
+main .boards label {
+  cursor: pointer;
+}
+
+main .boards button {
+  display: none;
+}
+
+main .boards .board {
   display: block;
+  margin: 0 auto 10px auto;
   border-radius: 5px;
   border: 0px none;
-  margin: 0 auto 10px auto;
   background-color: white;
   padding: 10px;
   width: 80%;
@@ -246,60 +502,53 @@ main div.boards .board {
           transition-duration: 0.5s;
 }
 
-main div.boards .board label {
-  cursor: pointer;
-}
-
-main div.boards .board button {
-  display: none;
-}
-
-main div.boards .board .date {
-  margin: 0;
-  font-size: 10px;
+main .boards .board .date {
+  font-family: "M PLUS 1p", cursive;
   color: #6d6d6d;
+  font-size: 10px;
+  margin: 0;
 }
 
-main div.boards .board:hover {
+main .boards .board:hover {
   width: 90%;
   background-color: #f3f3f3;
 }
 
-main div.boards .comment {
+main .boards .comment {
   display: block;
+  margin: 0 auto 10px auto;
   border-radius: 5px;
   border: 0px none;
-  margin: 0 auto 10px auto;
   background-color: white;
   padding: 10px;
   width: 90%;
   min-height: 40vh;
 }
 
-main div.boards .comment .date {
+main .boards .comment .date {
   margin: 0 0 10px 0;
   font-size: 10px;
   color: #6d6d6d;
 }
 
-main div.boards .comment h2 {
+main .boards .comment h2 {
   display: block;
   border-bottom: solid 1px silver;
   font-size: 20px;
   margin: 20px 10px;
 }
 
-main div.boards .comment p {
+main .boards .comment p {
   display: block;
   margin: 20px;
   color: #5a5a5a;
 }
 
-main div.boards .comment p.right {
+main .boards .comment p.right {
   text-align: right;
 }
 
-main div.boards .comment .message {
+main .boards .comment .message {
   margin: 10px;
   border-radius: 10px;
   background: #e4e4e4;
@@ -308,17 +557,16 @@ main div.boards .comment .message {
   padding: 8px;
 }
 
-main div.boards .comment .message.mine {
+main .boards .comment .message.mine {
   background: #0194e9;
   color: white;
 }
 
-main div.boards .comment .contact {
+main .boards .comment .contact {
   display: block;
-  display: block;
+  margin: 20px auto 10px auto;
   border-radius: 10px;
   border: 0px none;
-  margin: 20px auto 10px auto;
   color: white;
   text-decoration: none;
   width: 40%;
@@ -329,20 +577,23 @@ main div.boards .comment .contact {
           transition-duration: 0.5s;
 }
 
-main div.boards .comment .contact:hover {
+main .boards .comment .contact:hover {
   background: #ff52ae;
 }
 
-main div.boards .button_frame {
+main .boards .button_frame {
+  width: 80%;
+  background: rgba(255, 255, 255, 0);
+  margin: auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 80%;
-  margin: auto;
-  background: rgba(255, 255, 255, 0);
 }
 
-main div.boards .button_frame button {
+main .boards .button_frame button {
   display: inline-block;
   margin: 5px;
   border: solid 2px silver;
@@ -350,124 +601,143 @@ main div.boards .button_frame button {
   cursor: pointer;
 }
 
-main div.make_board, main div.setting {
+main .make_board, main .setting {
   width: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 20px auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
 }
 
-main div.make_board p, main div.setting p {
+main .make_board p, main .setting p {
   font-family: "M PLUS 1p", cursive;
   color: black;
   font-size: 15px;
   font-weight: bold;
 }
 
-main div.make_board p.red, main div.setting p.red {
+main .make_board p.red, main .setting p.red {
   color: #ca0303;
 }
 
-main div.setting {
+main .setting {
   margin: 20px auto 20px 20px;
 }
 
-main div.profile {
+main .profile {
   width: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 20px auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
   font-family: "M PLUS 1p", cursive;
   color: black;
   font-size: 17px;
 }
 
-main div.profile .besic {
+main .profile .besic {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin: 10px auto;
 }
 
-main div.profile .besic .text {
+main .profile .besic .text {
   display: block;
+  margin: 10px auto;
   border-radius: 10px;
   border: 0px none;
-  margin: 10px auto;
   background-color: white;
   width: 50%;
   min-height: 30vh;
 }
 
-main div.profile .besic .text p {
+main .profile .besic .text p {
   display: block;
   margin-left: 10%;
   color: #5a5a5a;
 }
 
-main div.profile .besic .icon {
+main .profile .besic .icon {
   display: block;
+  margin: 10px auto;
   border-radius: 10px;
   border: dashed 1px silver;
-  margin: 10px auto;
   width: 30%;
   max-height: 30vh;
 }
 
-main div.profile .details {
+main .profile .details {
   display: block;
+  margin: 10px auto;
   border-radius: 10px;
   border: 0px none;
-  margin: 10px auto;
   background-color: white;
   width: 90%;
   min-height: 30vh;
 }
 
-main div.profile .details p {
+main .profile .details p {
   display: block;
   margin: 10px;
   color: #5a5a5a;
+  white-space: pre-wrap;
 }
 
-main div.profile .details h2 {
+main .profile .details h2 {
   display: block;
   border-bottom: solid 1px silver;
 }
 
-main div form, main div .form {
-  width: 80%;
+main .form, main .chat_box {
+  width: 90%;
+  background: rgba(255, 255, 255, 0);
+  margin: 20px auto;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-family: 'M PLUS 1p',cursive;
+}
+
+main form, main .form, main .chat_box {
   margin: 10px auto;
 }
 
-main div form label, main div .form label {
+main form label, main .form label, main .chat_box label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-main div form input[type=text], main div form textarea, main div form select, main div .form input[type=text], main div .form textarea, main div .form select {
+main form input[type=text], main form textarea, main form select, main .form input[type=text], main .form textarea, main .form select, main .chat_box input[type=text], main .chat_box textarea, main .chat_box select {
   font-family: "M PLUS 1p", cursive;
   color: black;
   font-size: 15px;
   display: block;
+  margin: 10px 20px;
   border-radius: 10px;
   border: solid 1px white;
-  margin: 10px 20px;
   width: 50%;
   height: 40px;
 }
 
-main div form select, main div .form select {
+main form select, main .form select, main .chat_box select {
   width: 30%;
   height: 30px;
 }
 
-main div form textarea, main div .form textarea {
+main form textarea, main .form textarea, main .chat_box textarea {
   width: 90%;
   height: 160px;
   resize: vertical;
 }
 
-main div form input[type=submit], main div .form input[type=submit] {
+main form input[type=submit], main .form input[type=submit], main .chat_box input[type=submit] {
   display: block;
+  margin: 10px auto;
   border-radius: 10px;
   border: solid 1px white;
-  margin: 10px auto;
   background-color: deeppink;
   color: white;
   padding: 10px 20px;
@@ -476,17 +746,16 @@ main div form input[type=submit], main div .form input[type=submit] {
   opacity: 0.85;
 }
 
-main div form input[type=submit]:hover, main div .form input[type=submit]:hover {
+main form input[type=submit]:hover, main .form input[type=submit]:hover, main .chat_box input[type=submit]:hover {
   opacity: 1;
 }
 
-main div form fieldset, main div .form fieldset {
+main form fieldset, main .form fieldset, main .chat_box fieldset {
   border: 0px none;
   border-radius: 10px;
-  background: cornsilk;
 }
 
-main div form fieldset legend, main div .form fieldset legend {
+main form fieldset legend, main .form fieldset legend, main .chat_box fieldset legend {
   padding: 10px;
   font-family: "M PLUS 1p", cursive;
   color: white;
@@ -495,34 +764,37 @@ main div form fieldset legend, main div .form fieldset legend {
   border-radius: 10px;
 }
 
-main div form fieldset .radio_flame, main div .form fieldset .radio_flame {
+main form fieldset .radio_flame, main .form fieldset .radio_flame, main .chat_box fieldset .radio_flame {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-main div form fieldset .radio_flame label, main div .form fieldset .radio_flame label {
+main form fieldset .radio_flame label, main .form fieldset .radio_flame label, main .chat_box fieldset .radio_flame label {
   display: block;
   margin: 15px;
 }
 
-main div .form {
+main .chat_box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-main div .form textarea {
+main .chat_box textarea {
   width: 80%;
   height: 40px;
 }
 
+/*******************************************
+login,create form
+*******************************************/
 .login_form, .create_form {
   display: block;
+  margin: 30px auto;
   position: relative;
   background-color: rgba(255, 255, 255, 0.6);
   top: 50px;
-  margin: 30px auto;
   width: 30%;
   padding: 0 10px 10px 10px;
   border-radius: 10px;
@@ -535,16 +807,16 @@ main div .form textarea {
   width: 75%;
   height: 40px;
   display: block;
+  margin: 5px auto 10px auto;
   border-radius: 10px;
   border: solid 1px white;
-  margin: 5px auto 10px auto;
 }
 
 .login_form input[type=submit], .create_form input[type=submit] {
   display: block;
+  margin: 10px auto;
   border-radius: 10px;
   border: solid 1px white;
-  margin: 10px auto;
   background-color: deeppink;
   color: white;
   padding: 10px 20px;
@@ -559,11 +831,12 @@ main div .form textarea {
 
 .login_form h1, .create_form h1 {
   display: block;
+  margin: 10px 10px 20px 10px;
   border-radius: 10px;
   border: 0px none;
-  margin: 10px 10px 20px 10px;
-  font-size: 20px;
+  font-family: "M PLUS 1p", cursive;
   color: white;
+  font-size: 20px;
   background-color: deeppink;
   padding: 5px;
   width: 50%;
@@ -613,6 +886,9 @@ main div .form textarea {
   }
 }
 
+/*******************************************
+footer
+*******************************************/
 footer {
   position: absolute;
   background: black;
@@ -623,42 +899,5 @@ footer {
   margin: auto;
   width: 100%;
   bottom: 0;
-}
-
-table {
-  margin: 10px auto;
-}
-
-th, td {
-  border: solid 1px black;
-  padding: 5px 10px;
-}
-
-th {
-  background-color: gray;
-  color: white;
-}
-
-.space {
-  margin-right: 20px;
-}
-
-p.gide {
-  font-family: "M PLUS 1p", cursive;
-  color: black;
-  font-size: 15px;
-  margin: 10px 20px;
-}
-
-h3 {
-  font-family: "M PLUS 1p", cursive;
-  color: black;
-  font-size: 20px;
-  margin: 10px;
-}
-
-i {
-  margin-right: 10px;
-  font-size: 30px;
 }
 /*# sourceMappingURL=app.css.map */
