@@ -1,3 +1,13 @@
+/*******************************************
+variable
+*******************************************/
+$backcolor: rgba(255,255,255,0.6);
+$div_margin:20px auto;
+$red:rgb(199, 37, 37);
+$blue:rgb(56, 179, 228);
+/*******************************************
+@mixin
+*******************************************/
 @mixin font($font-family,$color,$font-size){
     font-family:$font-family,cursive;
     color:$color;
@@ -9,11 +19,14 @@
     height:$height;
 }
 
-@mixin flame($border-radius,$border,$margin){
+@mixin flame($margin){
     display: block;
+    margin:$margin;
+}
+
+@mixin  border($border-radius,$border) {
     border-radius:$border-radius;
     border:$border;
-    margin:$margin;
 }
 
 @mixin a_line($color){
@@ -21,6 +34,31 @@
     text-decoration:none;
 }
 
+@mixin animation($name,$element,$before,$affter,$time){
+    animation-name:$name;
+    animation-duration:$time;
+    @keyframes #{$name}{
+        from{
+            #{$element}:$before;
+        }
+        to{
+            #{$element}:$affter;
+        }
+    }
+}
+
+@mixin div_elements($width,$back,$margin) {
+    width:$width;
+    background: $back;
+    margin:$margin;
+    border-radius:5px;
+    padding-bottom:10px;
+    font-family: 'M PLUS 1p',cursive;
+}
+
+/*******************************************
+html,boby
+*******************************************/
 *{
     box-sizing: border-box;
 }
@@ -38,8 +76,124 @@ body{
         padding:0 0 100px 0;
         min-height: 100vh;
     }
+    .success_comment{
+        @include flame(0);
+        position: fixed;
+        background: deeppink;
+        color: white;
+        bottom:0;
+        width:100%;
+        padding:20px;
+        @include animation("fadeIn","opacity",0,1,0.8s);
+    }
+    .fixed{
+        display:none;
+        margin:0;
+        position: fixed;
+        background:rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        width:100%;
+        height:100%;
+        top:0;
+        &.on{
+            display:block;
+        }
+        .head{
+            display: flex;
+            @include font('M PLUS 1p',white,20px);
+            @include border(5px,0px none);
+            background: deeppink;
+            .fa-times{
+                display: block;
+                margin-left: auto;
+                font-size:25px;
+                color: black;
+                background: white;
+                transition-duration: 0.5s;
+                padding:5px 10px;
+                border-radius: 10px;
+                &:hover{
+                    color: white;
+                    background:$red;
+                }
+            }
+        }
+        .box,.editbox{
+            top:40%;
+            position: relative;
+            @include div_elements(30%,rgb(255, 214, 214),auto);
+            height: 20%;
+            text-align: center;
+            button{
+                @include font('M PLUS 1p',white,15px);
+                @include border(5px,0px none);
+                padding:10px;
+                margin:10px;
+                display:inline-block;
+                cursor: pointer;
+                &#OK{
+                    background: $red;
+                }
+                &#NO{
+                    background: $blue;
+                }
+            }
+        }
+        .editbox{
+            @include div_elements(50%,rgb(255, 214, 214),auto);
+            height: 60%;
+            top:20%;
+            input[type = text],textarea{
+                @include font('M PLUS 1p', black,15px);
+                @include flame(10px 20px);
+                @include border(10px,solid 1px white);
+                @include width_height(50%,40px);
+            }
+            textarea{
+                @include width_height(90%,160px);
+                resize: vertical;
+                white-space: pre-wrap;
+            }
+            input[type = submit]{
+                @include flame(10px auto);
+                @include border(10px,0px none);
+                background-color: deeppink;
+                color: white;
+                padding:10px 20px;
+                transition-duration:0.6s;
+                opacity:0.85;
+                &:hover{
+                    opacity:1;
+                }
+            }
+        }
+    }
 }
 
+/*******************************************
+other
+*******************************************/
+.space{
+    margin-right: 20px;
+}
+
+p.gide_text{
+    @include font('M PLUS 1p',black,15px);
+    margin:10px 20px;
+}
+h3{
+    @include font('M PLUS 1p',black,20px);
+    margin:10px;
+}
+
+i{
+    margin-right:10px;
+    font-size: 30px;
+}
+
+/*******************************************
+header
+*******************************************/
 header{
     position: relative;
     padding:10px 0px;
@@ -47,6 +201,13 @@ header{
     @include font('M PLUS 1p', white,15px);
     margin:0;
     background: deeppink;
+    &.scroll{
+        position: fixed;
+        z-index:3;
+        padding:10px 0px;
+        height: 12%;
+        transition-duration: 0.5s;
+    }
     .header{
         display: flex;
         margin:0px auto;
@@ -56,6 +217,30 @@ header{
             a{
                 text-align: center;
                 @include font('Cherry Swash', white,30px);
+            }
+        }
+        p{
+            @include flame(5px);
+            text-align:right;
+            font-weight:Medium;
+        }
+        i{
+            font-size:20px;
+        }
+        a{
+            @include flame(0 10px);
+            padding:5px 10px;
+            text-decoration: none;
+            transition-duration:0.5s;
+            &.make_board{
+                border-radius:10px;
+                background: rgb(19, 184, 19);
+                padding-top:10px;
+                vertical-align: middle;
+                color: white;
+                &:hover{
+                    background: rgb(23, 226, 23);
+                }
             }
         }
         .menu{
@@ -96,54 +281,35 @@ header{
                 display:block;
             }
         }
-        p{
-            display:block;
-            text-align:right;
-            font-weight:Medium;
-            margin:5px;
-        }
-        i{
-            font-size:20px;
-        }
-        a{
-            display: block;
-            margin:0 10px;
-            padding:5px 10px;
-            text-decoration: none;
-            transition-duration:0.5s;
-            &.make_board{
-                border-radius:10px;
-                background: rgb(19, 184, 19);
-                padding-top:10px;
-                vertical-align: middle;
-                color: white;
-                &:hover{
-                    background: rgb(23, 226, 23);
-                }
-            }
-        }
         form.seach_form{
             display:flex;
             margin:5px auto;
             height:90%;
             input[type = search]{
-                @include flame(3px 0px 0px 3px,solid 1px silver,0);
+                @include flame(0);
+                @include border(3px 0px 0px 3px,solid 1px silver);
                 width:400px;
             }
             button{
-                @include flame(0px 3px 3px 0px,solid 1px silver,0);
+                @include flame(0);
+                @include border(0px 3px 3px 0px,solid 1px silver);
                 @include font('M PLUS 1p', black,20px);
                 cursor: pointer;
             }
         }
     }
 }
-
+/*******************************************
+main
+*******************************************/
 main{
     position:relative;
     display: flex;
     max-width: 1300px;
     margin:auto;
+    &.scroll{
+        padding-top:70px;
+    }
     h1{
         @include font('Cherry Swash', white,25px);
         background-color:deeppink;
@@ -153,13 +319,12 @@ main{
     }
     .setting_menu{
         margin:20px;
-        background-color:rgba(255, 255, 255, 0.6);
+        background-color:$backcolor;
         border-radius:5px;
         width:20%;
         max-height:30vh;
         a{
-            display: block;
-            margin:20px;
+            @include flame(20px);
             @include font('M PLUS 1p',black,18px);
             transition-duration:0.5s;
             text-decoration: none;
@@ -169,231 +334,250 @@ main{
             background:white;
         }
     }
-    div{
-        padding-bottom:10px;
-        margin:20px auto;
-        background-color:rgba(255, 255, 255, 0.6);
-        border-radius:5px;
-        font-family: 'M PLUS 1p',cursive;
-        &.gide{
-            width: 90%;
-            color: black;
-            font-size: 14px;
+    .gide,.subcomment{
+        @include div_elements(90%,$backcolor,$div_margin);
+        color: black;
+        font-size: 14px;
+        padding:10px;
+        @include font('M PLUS 1p',black,15px);
+    }
+    .subcomment{
+        white-space: pre-wrap;
+    }
+    .saccess{
+        @include div_elements(50%,$backcolor,$div_margin);
+        text-align: center;
+        @include font('M PLUS 1p',black,15px);
+        a{
+            @include flame(auto);
+            background: deeppink;
+            border-radius:5px;
             padding:10px;
+            width:30%;
+            @include a_line(white);
         }
-        &.saccess{
-            width:50%;
-            text-align: center;
-            a{
-                background-color: silver;
-                @include a_line(white);
+    }
+    .boards{
+        @include div_elements(50%,$backcolor,20px auto 20px 20px);
+        i{
+            z-index:1;
+            &.blue{
+                color: $blue;
+            }
+            &.red{
+                color: $red;
+            }
+            &:hover{
+                opacity:0.6;
             }
         }
-        &.boards{
-            width:50%;
-            margin:20px auto 20px 20px;
-            .board{
-                @include flame(5px,0px none,0 auto 10px auto);
-                background-color:white;
-                padding:10px;
-                width:80%;
-                transition-duration:0.5s;
-                label{
-                    cursor:pointer;
-                }
-                button{
-                    display: none;
-                }
-                .date{
-                    margin:0;
-                    font-size:10px;
-                    color: rgb(109, 109, 109);
-                }
-                &:hover{
-                    width:90%;
-                    background-color:rgb(243, 243, 243);
-                }
+        label{
+            cursor:pointer;
+        }
+        button{
+            display: none;
+        }
+        .board{
+            @include flame(0 auto 10px auto);
+            @include border(5px,0px none);
+            background-color:white;
+            padding:10px;
+            width:80%;
+            transition-duration:0.5s;
+            .date{
+                @include font('M PLUS 1p',rgb(109, 109, 109), 10px);
+                margin:0;
             }
-            .comment{
-                @include flame(5px,0px none,0 auto 10px auto);
-                background-color:white;
-                padding:10px;
+            &:hover{
                 width:90%;
-                min-height:40vh;
-                .date{
-                    margin:0 0 10px 0;
-                    font-size:10px;
-                    color: rgb(109, 109, 109);
-                }
-                h2{
-                    display: block;
-                    border-bottom:solid 1px silver;
-                    font-size: 20px;
-                    margin:20px 10px;
-                }
-                p{
-                    display: block;
-                    margin:20px;
-                    color:rgb(90, 90, 90);
-                    &.right{
-                        text-align: right;
-                    }
-                }
-                .message{
-                    margin:10px;
-                    border-radius: 10px;
-                    background:rgb(228, 228, 228);
-                    max-width:50vh;
-                    min-width:10vh;
-                    padding:8px;
-                    &.mine{
-                        background:rgb(1, 148, 233);
-                        color: white;
-                    }
-                }
-                .contact{
-                    display: block;
-                    @include flame(10px,0px none,20px auto 10px auto);
-                    @include a_line(white);
-                    width:40%;
-                    padding:10px 0px;
-                    text-align: center;
-                    background: deeppink;
-                    transition-duration: 0.5s;
-                    &:hover{
-                        background: rgb(255, 82, 174);
-                    }
-                }
-            }
-            .button_frame{
-                display: flex;
-                width:80%;
-                margin:auto;
-                background:rgba(255, 255, 255, 0);
-                button{
-                    display: inline-block;
-                    margin:5px;
-                    border:solid 2px silver;
-                    text-align: center;
-                    cursor:pointer;
-                }
+                background-color:rgb(243, 243, 243);
             }
         }
-        &.make_board,&.setting{
-            width:50%;
+        .comment{
+            @include flame(0 auto 10px auto);
+            @include border(5px,0px none);
+            background-color:white;
+            padding:10px;
+            width:90%;
+            min-height:40vh;
+            .date{
+                margin:0 0 10px 0;
+                font-size:10px;
+                color: rgb(109, 109, 109);
+            }
+            h2{
+                display: block;
+                border-bottom:solid 1px silver;
+                font-size: 20px;
+                margin:20px 10px;
+            }
             p{
-                @include font('M PLUS 1p', black,15px);
-                font-weight:bold;
-                &.red{
-                    color: rgb(202, 3, 3);
+                @include flame(20px);
+                color:rgb(90, 90, 90);
+                &.right{
+                    text-align: right;
+                }
+            }
+            .message{
+                margin:10px;
+                border-radius: 10px;
+                background:rgb(228, 228, 228);
+                max-width:50vh;
+                min-width:10vh;
+                padding:8px;
+                &.mine{
+                    background:rgb(1, 148, 233);
+                    color: white;
+                }
+            }
+            .contact{
+                @include flame(20px auto 10px auto);
+                @include border(10px,0px none);
+                @include a_line(white);
+                width:40%;
+                padding:10px 0px;
+                text-align: center;
+                background: deeppink;
+                transition-duration: 0.5s;
+                &:hover{
+                    background: rgb(255, 82, 174);
                 }
             }
         }
-        &.setting{
-            margin:20px auto 20px 20px;
-        }
-        &.profile{
-            width:50%;
-            @include font('M PLUS 1p', black,17px);
-            .besic{
-                display: flex;
-                margin:10px auto;
-                .text{
-                    @include flame(10px,0px none,10px auto);
-                    background-color:white;
-                    width:50%;
-                    min-height:30vh;
-                    p{
-                        display: block;
-                        margin-left:10%;
-                        color: rgb(90, 90, 90);
-                    }
-                }
-                .icon{
-                    @include flame(10px,dashed 1px silver,10px auto);
-                    width:30%;
-                    max-height:30vh;
-                }
+        .button_frame{
+            @include div_elements(80%,rgba(255, 255, 255, 0),auto);
+            display: flex;
+            button{
+                display: inline-block;
+                margin:5px;
+                border:solid 2px silver;
+                text-align: center;
+                cursor:pointer;
             }
-            .details{
-                @include flame(10px,0px none,10px auto);
+        }
+    }
+    .make_board,.setting{
+        @include div_elements(50%,$backcolor,$div_margin);
+        p{
+            @include font('M PLUS 1p', black,15px);
+            font-weight:bold;
+            &.red{
+                color: rgb(202, 3, 3);
+            }
+        }
+    }
+    .setting{
+        margin:20px auto 20px 20px;
+    }
+    .profile{
+        @include div_elements(50%,$backcolor,$div_margin);
+        @include font('M PLUS 1p', black,17px);
+        .besic{
+            display: flex;
+            margin:10px auto;
+            .text{
+                @include flame(10px auto);
+                @include border(10px,0px none);
                 background-color:white;
-                width:90%;
+                width:50%;
                 min-height:30vh;
                 p{
                     display: block;
-                    margin:10px;
-                    color:rgb(90, 90, 90);
+                    margin-left:10%;
+                    color: rgb(90, 90, 90);
                 }
-                h2{
-                    display: block;
-                    border-bottom:solid 1px silver;
-                }
+            }
+            .icon{
+                @include flame(10px auto);
+                @include border(10px,dashed 1px silver);
+                width:30%;
+                max-height:30vh;
             }
         }
-        form,.form{
-            width:80%;
-            margin:10px auto;
-            label{
-                display: flex;
+        .details{
+            @include flame(10px auto);
+            @include border(10px,0px none);
+            background-color:white;
+            width:90%;
+            min-height:30vh;
+            p{
+                @include flame(10px);
+                color:rgb(90, 90, 90);
+                white-space: pre-wrap;
             }
-            input[type = text],textarea,select{
-                @include font('M PLUS 1p', black,15px);
-                @include flame(10px,solid 1px white,10px 20px);
-                @include width_height(50%,40px);
-            }
-            select{
-                @include width_height(30%,30px);
-            }
-            textarea{
-                @include width_height(90%,160px);
-                resize: vertical;
-            }
-            input[type = submit]{
-                @include flame(10px,solid 1px white,10px auto);
-                background-color: deeppink;
-                color: white;
-                padding:10px 20px;
-                transition-duration:0.6s;
-                opacity:0.85;
-                &:hover{
-                    opacity:1;
-                }
-            }
-            fieldset{
-                border:0px none;
-                border-radius:10px;
-                background:cornsilk;
-                legend{
-                    padding:10px;
-                    @include font('M PLUS 1p', white,17px);
-                    background:deeppink;
-                    border-radius:10px;
-                }
-                .radio_flame{
-                    display: flex;
-                    label{
-                        display: block;
-                        margin:15px;
-                    }
-                }
+            h2{
+                display: block;
+                border-bottom:solid 1px silver;
             }
         }
-        .form{
+    }
+    .form,.chat_box{
+        @include div_elements(90%,rgba(255, 255, 255, 0),$div_margin);
+    }
+    form,.form,.chat_box{
+        margin:10px auto;
+        label{
             display: flex;
-            textarea{
-                @include width_height(80%,40px);
+        }
+        input[type = text],textarea,select{
+            @include font('M PLUS 1p', black,15px);
+            @include flame(10px 20px);
+            @include border(10px,solid 1px white);
+            @include width_height(50%,40px);
+        }
+        select{
+            @include width_height(30%,30px);
+        }
+        textarea{
+            @include width_height(90%,160px);
+            resize: vertical;
+        }
+        input[type = submit]{
+            @include flame(10px auto);
+            @include border(10px,solid 1px white);
+            background-color: deeppink;
+            color: white;
+            padding:10px 20px;
+            transition-duration:0.6s;
+            opacity:0.85;
+            &:hover{
+                opacity:1;
             }
+        }
+        fieldset{
+            border:0px none;
+            border-radius:10px;
+            legend{
+                padding:10px;
+                @include font('M PLUS 1p', white,17px);
+                background:deeppink;
+                border-radius:10px;
+            }
+            .radio_flame{
+                display: flex;
+                label{
+                    display: block;
+                    margin:15px;
+                }
+            }
+        }
+    }
+    .chat_box{
+        display: flex;
+        textarea{
+            @include width_height(80%,40px);
         }
     }
 }
 
+/*******************************************
+login,create form
+*******************************************/
 .login_form,.create_form{
-    display:block;
+    @include flame(30px auto);
     position: relative;
-    background-color:rgba(255, 255, 255, 0.6);
+    background-color:$backcolor;
     top:50px;
-    margin:30px auto;
     width:30%;
     padding:0 10px 10px 10px;
     border-radius:10px;
@@ -401,10 +585,12 @@ main{
     font-family:'M PLUS 1p',cursive;
     input[type = email],input[type = password],input[type = text]{
         @include width_height(75%,40px);
-        @include flame(10px,solid 1px white,5px auto 10px auto);
+        @include flame(5px auto 10px auto);
+        @include border(10px,solid 1px white)
     }
     input[type = submit]{
-        @include flame(10px,solid 1px white,10px auto);
+        @include flame(10px auto);
+        @include border(10px,solid 1px white);
         background-color: deeppink;
         color: white;
         padding:10px 20px;
@@ -415,17 +601,16 @@ main{
         }
     }
     h1{
-        @include flame(10px,0px none,10px 10px 20px 10px);
-        font-size:20px;
-        color: white;
+        @include flame(10px 10px 20px 10px);
+        @include border(10px,0px none);
+        @include font('M PLUS 1p',white,20px);
         background-color:deeppink;
         padding:5px;
         width:50%;
         text-align: center;
     }
     p{
-        display: block;
-        margin:5px auto;
+        @include flame(5px auto);
         font-weight:bold;
         width:75%;
         &.error{
@@ -438,8 +623,7 @@ main{
         }
     }
     a{
-        display: block;
-        margin:10px auto;
+        @include flame(10px auto);
         @include a_line(blue);
         text-align: center;
         width:50%;
@@ -456,6 +640,9 @@ main{
     }
 }
 
+/*******************************************
+footer
+*******************************************/
 footer{
     position:absolute;
     background: black;
@@ -464,38 +651,4 @@ footer{
     margin:auto;
     width: 100%;
     bottom:0;
-}
-
-
-table{
-    margin:10px auto;
-}
-
-th,td{
-    border:solid 1px black;
-    padding:5px 10px;
-}
-
-th{
-    background-color: rgb(128, 128, 128);
-    color: white;
-}
-
-.space{
-    margin-right: 20px;
-}
-
-p.gide{
-    @include font('M PLUS 1p',black,15px);
-    margin:10px 20px;
-}
-
-h3{
-    @include font('M PLUS 1p',black,20px);
-    margin:10px;
-}
-
-i{
-    margin-right:10px;
-    font-size: 30px;
 }
