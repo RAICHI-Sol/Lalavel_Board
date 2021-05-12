@@ -2,88 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\Board;
-use App\Models\BoardComment;
-use App\Models\Profile;
-use Illuminate\Support\Facades\Hash;
-
-
 class Test extends Controller
 {
-    public function index(Request $request)
-    {
-        $count = Board::count();
-        $boards = BoardController::boards_DB($request->page);
-
-        return view('home',[
-            'boards' => $boards,
-            'title'  => 'Home',
-            'count'  => $count,
-            'search' => 'none',
-        ]);
-    }
-
-    public function show(){
-        if(Auth::check()){
-            $item = User::find(Auth::id());
-            return view('show',['item' => $item]);
-        }
-        else{
-            return view('Auth/login');
-        }
-    }
-
-    public function create(Request $request){
-        $user = new User();
-        $user->fill([
-            'name'  => $request->name,
-            'email' => $request->email,
-            'password'=>Hash::make($request->password),
-        ])->save();
-
-        $profile = new Profile();
-
-        $profile->create([
-            'userid'  => $user->id,
-            'profile' => 'よろしくお願いします',
-        ]);
-
-        return view('create_success',['name' => $user->name]);
-    }
-    public function destroy()
-    {
-        $userid = Auth::id();
-        $boards = Board::where('create_userid',$userid)->get();
-        for($i = 0;$i < $boards->count();$i++){
-            BoardComment::where('board_id',$boards[$i]->id)->delete();
-            $boards[$i]->delete();
-        }
-        Profile::where('userid',$userid)->delete();
-        User::find($userid)->delete();
-
-        $count = Board::count();
-        $boards = BoardController::boards_DB(0);
-
-        return view('home',[
-            'boards' => $boards,
-            'title'  => 'Home',
-            'count'  => $count,
-            'search' => 'none',
-        ]);
-    }
-
-    public function make_form(){
-        if(Auth::check()){
-            return view('make');
-        }
-        else{
-            return view('Auth/login');
-        }
-    }
-
     public static function from_select($fromid):string{
         $from = array(
                     '北海道','青森県','岩手県','宮城県','秋田県','山形県',
@@ -112,4 +32,7 @@ class Test extends Controller
         return ($target == $sex) ? 'checked': '';
     }
 
+    public static function get_url($title,$id,$search){
+        return ($title =='Home') ? './?page='.$id: './result/?page='.$id.'&search='.$search;
+    }
 }
