@@ -9,18 +9,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function show($id){
+    /*********************************************
+     * Show Profile
+    **********************************************/
+    public function show($id)
+    {
         $user = User::find($id);
         return view('profile',['user'=>$user]);
     }
-
-    public function setting(){
-        $id = Auth::id();
-        $user = User::find($id);
+    /*********************************************
+     * Show Profile Setting
+    **********************************************/
+    public function setting()
+    {
+        $user = User::find(Auth::id());
         return view('setting',['user'=>$user]);
     }
-
-    public function update(Request $request){
+    /*********************************************
+     * Update Profile
+    **********************************************/
+    public function update(Request $request)
+    {
         $id = Auth::id();
 
         $user = User::find($id);
@@ -37,8 +46,6 @@ class ProfileController extends Controller
             'profile' => $request->profile,
         ])->save();
 
-        $user = User::find($id);
-
-        return view('setting',['user'=>$user]);
+        return $this->setting();
     }
 }
