@@ -36,7 +36,7 @@
             @endforeach
         @endif
     </article>
-    <div class = "form">
+    <div class = "chat_box">
         <input type = "hidden" id = "id" value = {{$board->create_userid}}>
         <input type = "hidden" name = "target" id = "target" value = "{{$target}}">
         <textarea placeholder = "メッセージを入力" name = "message" required></textarea>

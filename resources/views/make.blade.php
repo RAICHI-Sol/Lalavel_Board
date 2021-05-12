@@ -14,7 +14,7 @@
             <p class = 'error'>{{ $message }}</p>
         @enderror
         <textarea rows = "8" cols="40" name = "comment" required wrap="hard"
-        class = "@error('email') is-invalid @enderror" placeholder = "概要"></textarea>
+        class = "@error('text') is-invalid @enderror" placeholder = "概要"></textarea>
         @error('text')
             <p class = 'error'>{{ $message }}</p>
         @enderror

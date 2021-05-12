@@ -15,9 +15,7 @@
 @section('main')
 <div class = "setting">
     <h1>プロフィール編集</h1>
-    <form action="{{ route('setting') }}" method="POST" autocomplete="off">
-        @csrf
-        @method('put')
+    <div class = "form">
         <fieldset>
             <legend>プロフィール</legend>
             <label>
@@ -80,10 +78,14 @@
         </fieldset>
         <fieldset>
             <legend>自己紹介</legend>
-            <textarea rows = "8" cols="40" name = "profile" wrap = "hard"
+            <textarea rows = "8" cols="40" name = "profile" wrap = "hard" 
             required>{{$user->profile->profile}}</textarea>
         </fieldset>
         <input type = "submit" value = "投稿">
-    </form>
+    </div>
 </div>
+@endsection
+
+@section('script')
+    <script src = '/laravel/resources/js/main.js'></script>
 @endsection
