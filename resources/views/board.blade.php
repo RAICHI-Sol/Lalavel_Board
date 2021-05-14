@@ -30,27 +30,19 @@
         </p>
         <h2>
             概要説明
-            @if(Auth::id() == $userid)
-                <label for = "edit{{$id}}">
-                    <i class="fas fa-pen-square blue"></i>
-                    <button id = "edit{{$id}}"
-                    onclick = "click_edit({{$id}},'{{$name}}','{{$comment}}')"></button>
-                </label>
-                <label for = "delete{{$id}}">
-                    <i class="fas fa-minus-square red"></i>
-                    <button id = "delete{{$id}}" onclick = "click_delete({{$id}})"></button>
-                </label>
-            @endif
+            @include('components.iconBoard',['comment'=>$comment,'name'=>$name,'userid'=>$userid,'id'=>$id,])
         </h2>
         <p class = "subcomment">{{$boards->comment->comment}}</p>
         @if(Auth::check())
-            <a href = {{route('chat',$id)}} class = "contact">
-                @if(Auth::id() != $userid)
+            @if(Auth::id() != $userid)
+                <a href = {{route('chat',$id)}} class = "contact">
                     <i class="fas fa-comments"></i>話してみたい！
-                @else
-                    <i class="fas fa-comments"></i>トークを確認する
-                @endif
-            </a>
+                </a>
+            @else
+                <a href = {{route('mychat',$id)}} class = "contact">
+                    <i class="fas fa-comments"></i>トーク内容を確認する
+                </a>
+            @endif
         @else
             <a href = {{route('chat',$id)}} class = "contact">
                 <i class="fas fa-comments"></i>話してみたい！
@@ -61,15 +53,5 @@
 @endsection
 
 @section('fixed')
-    <div class='fixed'>
-        <div class="editbox">
-            <p class ='head'>
-                ボードを編集
-                <i class='fas fa-times' id = 'remove'></i>
-            </p>
-            <input type = 'text' name = 'name' required>
-            <textarea rows = '8' cols='40' name = 'comment' required wrap='hard'></textarea>
-            <input type = 'submit' id = 'submit' value = '編集完了'>
-        </div>
-    </div>
+    @include('components.hiddenForm')
 @endsection

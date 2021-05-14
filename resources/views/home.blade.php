@@ -36,16 +36,7 @@
                         </a>
                     </p>
                     <p>{{$board->board_name}}</p>
-                    @if(Auth::id() == $userid)
-                        <label for = "edit{{$id}}">
-                            <i class="fas fa-pen-square blue"></i>
-                            <button id = "edit{{$id}}" onclick = "click_edit({{$id}},'{{$name}}','{{$comment}}')"></button>
-                        </label>
-                        <label for = "delete{{$id}}">
-                            <i class="fas fa-minus-square red"></i>
-                            <button id = "delete{{$id}}" onclick = "click_delete({{$id}})"></button>
-                        </label>
-                    @endif
+                    @include('components.iconBoard',['comment'=>$comment,'name'=>$name,'userid'=>$userid,'id'=>$id,])
                     <button onclick = "location.href = './board/{{$id}}'" id = "board{{$id}}"></button>
                 </label>
             </article>
@@ -64,17 +55,7 @@
 @endsection
 
 @section('fixed')
-    <div class='fixed'>
-        <div class="editbox">
-            <p class ='head'>
-                ボードを編集
-                <i class='fas fa-times' id = 'remove'></i>
-            </p>
-            <input type = 'text' name = 'name' required>
-            <textarea rows = '8' cols='40' name = 'comment' required wrap='hard'></textarea>
-            <input type = 'submit' id = 'submit' value = '編集完了'>
-        </div>
-    </div>
+    @include('components.hiddenForm')
 @endsection
 
 

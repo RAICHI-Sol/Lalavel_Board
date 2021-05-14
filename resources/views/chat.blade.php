@@ -16,29 +16,15 @@
     <h1>Chat</h1>
     <article class = "comment">
         <h2>{{$board->board_name}}</h2>
-        <?php $target = 0?>
         @if($chats !=NULL)
             @foreach($chats as $chat)
-                @if($chat->from == Auth::id())
-                    <p class ="right">
-                        <span class = "message mine">
-                            {{(Crypt::decryptString($chat->message))}}
-                        </span>
-                    </p> 
-                @else
-                    <p><i class = "fas fa-user-circle"></i>
-                        <span class = "message">
-                            {{(Crypt::decryptString($chat->message))}}
-                        </span>
-                    </p>
-                    <?php $target = $chat->from?>
-                @endif
+                @include('components.chatComment',['chat'=>$chat])
             @endforeach
         @endif
     </article>
     <div class = "chat_box">
         <input type = "hidden" id = "id" value = {{$board->id}}>
-        <input type = "hidden" name = "target" id = "target" value = "{{$target}}">
+        <input type = "hidden" name = "target" id = "target" value = "{{$board->create_userid}}">
         <textarea placeholder = "メッセージを入力" name = "message" required></textarea>
         <input type="submit" id ="submit" value = "送信">
     </div>
