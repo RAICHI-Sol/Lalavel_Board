@@ -5,23 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chat extends Model
+class ChatEntry extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
-    protected $table = 'chat';
+    protected $table = 'chat_entry';
     protected $fillable = [
         'boardid',
-        'from',
-        'to',
-        'message',
+        'userid',
     ];
 
     Public function user()
     {
-      return $this->belongsTo('App\Models\User','from');
+      return $this->belongsTo('App\Models\User','userid');
     }
-
 }
