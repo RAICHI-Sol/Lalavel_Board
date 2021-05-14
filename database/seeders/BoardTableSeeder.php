@@ -20,13 +20,10 @@ class BoardTableSeeder extends Seeder
         //初期データ用意
         $boards = [
             ['board_name'=>'【相方募集】漫才ができる方',
-            'create_userid'=>2,
-            'watcher'=>0],
-            ['board_name'=>'トムとジェリーでおすすめの回教えてww',
-            'create_userid'=>7,
+            'create_userid'=>1,
             'watcher'=>0],
             ['board_name'=>'【急募】彼氏募集!',
-            'create_userid'=>3,
+            'create_userid'=>2,
             'watcher'=>0],
         ];
         
