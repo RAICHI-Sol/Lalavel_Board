@@ -3,23 +3,25 @@ $(function(){
      * メッセージ送信処理
     ************************************************/
     $('#submit').click(function(){
-        message = $('textarea[name="message"]').val();
         id      = $('#id').val();
-        target  = $('#target').val();
-
         var url = '/laravel/public/chat/' + id;
-        var data = {
-            "target":target,
-            "message":message,
-        };
-        ajaxSend("POST",url,data);
+        messageSend(url);
     });
+    /************************************************
+     * メッセージ送信処理(User Side)
+    ************************************************/
+    $('#mysubmit').click(function(){
+        id      = $('#id').val();
+        var url = '/laravel/public/chat/mypage/' + id;
+        messageSend(url);
+    });
+
     /************************************************
      * プロフィール設定処理
     ************************************************/
     $('.form > input[type = "submit"]').click(function(){
         username = $('input[name="name"]').val();
-        sex      = $('input[name="sex"]').val();
+        sex      = $('input[name="sex"]:checked').val();
         from     = $('select[name="from"]').val();
         old      = $('select[name="old"]').val();
         job      = $('select[name="job"]').val();
@@ -36,6 +38,21 @@ $(function(){
         };
         ajaxSend("PUT",url,data);
     });
+
+    /************************************************
+     * ajaxによるリアルタイム通信
+    ************************************************/
+    function messageSend(url){
+        message = $('textarea[name="message"]').val();
+        target  = $('#target').val();
+
+        var data = {
+            "target":target,
+            "message":message,
+        };
+        ajaxSend("POST",url,data);
+    }
+
     /************************************************
      * ajaxによるリアルタイム通信
     ************************************************/
