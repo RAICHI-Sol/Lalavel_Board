@@ -18,7 +18,7 @@ class CreateChat extends Migration
             $table->bigInteger('boardid');
             $table->bigInteger('from');
             $table->bigInteger('to');
-            $table->string('message');
+            $table->string('message',1024);
             $table->timestamp('create');
         });
     }
