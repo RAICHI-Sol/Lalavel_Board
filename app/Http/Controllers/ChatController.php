@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Chat;
+use App\Models\ChatEntry;
 use App\Models\Board;
 use Illuminate\Support\Facades\Crypt;
 use DateTime;
@@ -16,10 +17,11 @@ class ChatController extends Controller
     **********************************************/
     public function return_view($id,$myid,$board)
     {
+        $userid =  $board->create_userid;
         $chats = Chat::where('boardid',$id)->
-        where(function($query) use($myid){
-            $query->where('from',$myid)
-                  ->orwhere('to',$myid);
+        where(function($query) use($myid,$userid){
+            $query->where([['from',$myid],['to',$userid]])
+                  ->orwhere([['to',$myid],['from',$userid]]);
         })->get();
 
         return view('chat',['chats'=>$chats,'board'=>$board]);
@@ -42,6 +44,10 @@ class ChatController extends Controller
         $myid  = Auth::id();
         $board = Board::find($id);
 
+        if($this->entryCheck($myid,$id)==null){
+            $this->entryAdd($myid,$id);
+        }
+
         $newmessage = new Chat();
         $newmessage->create([
             'boardid'=>$id,
@@ -52,5 +58,24 @@ class ChatController extends Controller
         ]);
         
         return $this->return_view($id,$myid,$board);
+    }
+    /*********************************************
+     * ChatEntry Check
+    **********************************************/
+    public function entryCheck($userid,$boardid)
+    {
+        return ChatEntry::where('boardid',$boardid)
+               ->where('userid',$userid)->first();
+    }
+    /*********************************************
+     * ChatEntry Add
+    **********************************************/
+    public function entryAdd($userid,$boardid){
+        $newmessage = new ChatEntry();
+        $newmessage->create([
+            'boardid'=>$boardid,
+            'userid'=>$userid,
+            'entry'=>new DateTime()
+        ]);
     }
 }
