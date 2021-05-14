@@ -29,7 +29,7 @@ class ChatTableSeeder extends Seeder
             'to'=>2,
             'message'=>Crypt::encryptString('こんにちは!!')],
         ];
-        
+
         //投稿
         foreach($boards as $board){
             Chat::create($board);
