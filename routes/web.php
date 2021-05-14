@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MyChatController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -70,6 +71,10 @@ Route::prefix('create')->group(function(){
 Route::prefix('chat')->group(function(){
     Route::get('{id}', [ChatController::class, 'show'])->name('chat')->middleware('auth');
     Route::post('{id}', [ChatController::class, 'add'])->name('message');
+    Route::get('mypage/{id}', [MyChatController::class, 'show'])->name('mychat')->middleware('auth');
+    Route::post('mypage/{id}', [MyChatController::class, 'add'])->name('mymessage');
 });
 
-Route::get('/board/{id}', [BoardController::class, 'show']);
+Route::prefix('board')->group(function(){
+    Route::get('{id}', [BoardController::class, 'show']);
+});
