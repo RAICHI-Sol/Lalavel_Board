@@ -19,7 +19,7 @@
     </article>
     <article class = "details">
         <h2><i class="fas fa-clipboard-list"></i>自己紹介</h2>
-        <p>{{$user->profile->profile}}</p>
+        <p>{{Crypt::decryptString($user->profile->profile)}}</p>
     </article>
 </div>
 @endsection

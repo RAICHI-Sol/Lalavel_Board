@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -43,7 +44,7 @@ class ProfileController extends Controller
             'from'=> $request->from,
             'old' => $request->old,
             'job' => $request->job,
-            'profile' => $request->profile,
+            'profile' => Crypt::encryptString($request->profile),
         ])->save();
 
         return $this->setting();
