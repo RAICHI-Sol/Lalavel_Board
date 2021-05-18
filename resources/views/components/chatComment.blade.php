@@ -1,13 +1,8 @@
-@if($chat->from == Auth::id())
-    <p class ="right">
-        <span class = "message mine">
-            {{(Crypt::decryptString($chat->message))}}
-        </span>
-    </p>
+<label for = "message">
+    @if($chat->from == Auth::id())
+        <span class = "message mine">{{(Crypt::decryptString($chat->message))}}</span>
     @else
-    <p><i class = "fas fa-user-circle"></i>
-        <span class = "message">
-            {{(Crypt::decryptString($chat->message))}}
-        </span>
-    </p>
-@endif
+        <i class = "fas fa-user-circle"></i>
+        <span class = "message">{{(Crypt::decryptString($chat->message))}}</span>
+    @endif
+</label>
