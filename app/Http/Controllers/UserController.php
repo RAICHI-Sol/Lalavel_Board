@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Board;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -26,6 +28,24 @@ class UserController extends Controller
     /*********************************************
      * Create User
     **********************************************/
+    public function check(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255',
+            'password' =>'required|string|alpha_num|min:8|max:16',
+        ]);
+
+        if($validator->fails()){
+            return redirect('/create')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        else{
+            return $this->create($request);
+        }
+
+    }
     public function create(Request $request)
     {
         $user = new User();
@@ -39,7 +59,7 @@ class UserController extends Controller
 
         $profile->create([
             'userid'  => $user->id,
-            'profile' => 'よろしくお願いします',
+            'profile' => Crypt::encryptString('よろしくお願いします'),
         ]);
 
         return view('success',[
