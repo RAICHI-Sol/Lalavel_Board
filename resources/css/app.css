@@ -544,22 +544,27 @@ main .boards .comment p {
   color: #5a5a5a;
 }
 
-main .boards .comment p.right {
-  text-align: right;
+main .boards .comment label[for=message] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-main .boards .comment .message {
+main .boards .comment label[for=message] .message {
+  display: block;
   margin: 10px;
   border-radius: 10px;
   background: #e4e4e4;
-  max-width: 50vh;
-  min-width: 10vh;
+  min-width: 20vh;
+  max-width: 45vh;
   padding: 8px;
+  white-space: pre-wrap;
 }
 
-main .boards .comment .message.mine {
+main .boards .comment label[for=message] .message.mine {
   background: #0194e9;
   color: white;
+  margin-left: auto;
 }
 
 main .boards .comment .contact {
