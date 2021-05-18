@@ -79,7 +79,7 @@
         <fieldset>
             <legend>自己紹介</legend>
             <textarea rows = "8" cols="40" name = "profile" wrap = "hard" 
-            required>{{$user->profile->profile}}</textarea>
+            required>{{Crypt::decryptString($user->profile->profile)}}</textarea>
         </fieldset>
         <input type = "submit" value = "投稿">
     </div>
