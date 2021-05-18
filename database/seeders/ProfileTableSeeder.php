@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use \App\Models\Profile;
+use Illuminate\Support\Facades\Crypt;
 
 class ProfileTableSeeder extends Seeder
 {
@@ -19,23 +20,19 @@ class ProfileTableSeeder extends Seeder
 
         //初期データ用意
         $profiles = [
-            ['userid'=>2,
+            ['userid'=>1,
             'sex'=>'男',
             'from'=>'大阪府',
             'old'=>'25',
-            'profile'=>'宜しく'],
-            ['userid'=>3,
+            'profile'=>Crypt::encryptString('宜しく')],
+            ['userid'=>2,
             'sex'=>'女',
             'from'=>'東京都',
             'job'=>'事務系',
-            'profile'=>'よろしくお願いします！'],
-            ['userid'=>4,
+            'profile'=>Crypt::encryptString('よろしくお願いします！')],
+            ['userid'=>3,
             'job'=>'アーティスト',
-            'profile'=>'よろしく'],
-            ['userid'=>7,
-            'sex'=>'男',
-            'old'=>23,
-            'profile'=>'よろしくお願い致します'],
+            'profile'=>Crypt::encryptString('よろしく')],
         ];
         
         //投稿
