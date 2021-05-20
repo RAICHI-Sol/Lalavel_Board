@@ -20,13 +20,13 @@ class ChatTableSeeder extends Seeder
 
         //初期データ用意
         $boards = [
-            ['boardid'=>3,
-            'from'=>2,
-            'to'=>3,
-            'message'=>Crypt::encryptString('初めまして、こんにちは')],
-            ['boardid'=>3,
-            'from'=>3,
+            ['boardid'=>2,
+            'from'=>1,
             'to'=>2,
+            'message'=>Crypt::encryptString('初めまして、こんにちは')],
+            ['boardid'=>2,
+            'from'=>2,
+            'to'=>1,
             'message'=>Crypt::encryptString('こんにちは!!')],
         ];
 
