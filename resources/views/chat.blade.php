@@ -12,7 +12,7 @@
 @endsection
 
 @section('main')
-<div class = "boards">
+<div class = "boards" id = "app">
     <h1>Chat</h1>
     <article class = "comment">
         <h2>{{$board->board_name}}</h2>
@@ -25,11 +25,11 @@
     <div class = "chat_box">
         <input type = "hidden" id = "id" value = {{$board->id}}>
         <input type = "hidden" name = "target" id = "target" value = "{{$board->create_userid}}">
-        <textarea placeholder = "メッセージを入力" name = "message" required></textarea>
+        <textarea placeholder = "メッセージを入力" name = "message" required wrap='hard'></textarea>
         <input type="submit" id ="submit" value = "送信">
     </div>
 </div>
 @endsection
 @section('script')
-    <script src = '/laravel/resources/js/main.js'></script>
+    @include('components.chatScript',['url'=>'../chat/'.$board->id])
 @endsection
