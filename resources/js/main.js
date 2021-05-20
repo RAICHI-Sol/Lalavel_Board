@@ -2,7 +2,7 @@ $(function(){
     /************************************************
      * メッセージ送信処理
     ************************************************/
-    $('#submit').click(function(){
+    $('#submit').on('click',function(){
         id      = $('#id').val();
         var url = '/laravel/public/chat/' + id;
         messageSend(url);
@@ -10,7 +10,7 @@ $(function(){
     /************************************************
      * メッセージ送信処理(User Side)
     ************************************************/
-    $('#mysubmit').click(function(){
+    $('#mysubmit').on('click',function(){
         id      = $('#id').val();
         var url = '/laravel/public/chat/mypage/' + id;
         messageSend(url);
@@ -19,7 +19,7 @@ $(function(){
     /************************************************
      * プロフィール設定処理
     ************************************************/
-    $('.form > input[type = "submit"]').click(function(){
+    $('.form > input[type = "submit"]').on('click',function(){
         username = $('input[name="name"]').val();
         sex      = $('input[name="sex"]:checked').val();
         from     = $('select[name="from"]').val();
