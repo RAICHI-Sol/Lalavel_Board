@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Board;
 use Illuminate\Http\Request;
 use App\Models\BoardComment;
+use Illuminate\Support\Facades\Crypt;
+use App\Events\PusherEvent;
 
 class BoardController extends Controller
 {
@@ -99,11 +101,13 @@ class BoardController extends Controller
         ])->save();
 
         $newBoardComment = new BoardComment();
-        $newBoardComment->create([
+        $newBoardComment->fill([
             'board_id' =>$newBoard->id,
-            'comment'  =>$request->comment,
+            'comment'  =>Crypt::encryptString($request->comment),
             'tag_id'   =>1,
-        ]);
+        ])->save();
+
+        event(new PusherEvent($newBoard));
 
         $count = Board::count();
         $boards = $this->boards_DB();
@@ -122,7 +126,7 @@ class BoardController extends Controller
 
         $newBoardComment = BoardComment::where('board_id',$request->id)->first();
         $newBoardComment->fill([
-            'comment'  =>$request->comment,
+            'comment'  =>Crypt::encryptString($request->comment),
         ])->save();
 
         $count = Board::count();
