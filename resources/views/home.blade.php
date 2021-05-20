@@ -68,6 +68,6 @@
             }, 3000);
         </script>
     @endif
-    <script src="/laravel/public/js/app.js"></script>
-    <script src="/laravel/resources/js/bloadcast.js"></script>
+    <script src = "{{ secure_asset('js/app.js')}}"></script>
+    <script src="{{ secure_asset('js/bloadcast.js')}}"></script>
 @endsection

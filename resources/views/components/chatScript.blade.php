@@ -1,6 +1,5 @@
 <script src = "{{ secure_asset('js/main.js')}}"></script>
 <script src = "{{ secure_asset('js/app.js')}}"></script>
-<script src="/laravel/public/js/app.js"></script>
 <?php
     echo '<script>var id = '.Auth::id().'</script>';
     echo '<script>var url = "'.$url.'"</script>';
