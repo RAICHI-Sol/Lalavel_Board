@@ -14,7 +14,8 @@
 <script src = /laravel/resources/js/make_board.js></script>
 <div class = "boards">
     <?php
-        $comment = str_replace("\n","<br>",$boards->comment->comment);
+        $decrypt = Crypt::decryptString($boards->comment->comment);
+        $comment = str_replace("\n","<br>",$decrypt);
         $name    = $boards->board_name;
         $id      = $boards->id;
         $userid  = $boards->create_userid;
@@ -32,7 +33,7 @@
             概要説明
             @include('components.iconBoard',['comment'=>$comment,'name'=>$name,'userid'=>$userid,'id'=>$id,])
         </h2>
-        <p class = "subcomment">{{$boards->comment->comment}}</p>
+        <p class = "subcomment">{{$decrypt}}</p>
         @if(Auth::check())
             @if(Auth::id() != $userid)
                 <a href = {{route('chat',$id)}} class = "contact">

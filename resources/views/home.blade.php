@@ -14,14 +14,15 @@
 
 @section('main')
 <script src = /laravel/resources/js/make_board.js></script>
-<div class = "boards">
+<div class = "boards" id = "app">
     <h1>{{$title}}</h1>
     @if($boards->isEmpty())
         <p>該当するボードがございません。</p>
     @else
         @foreach($boards as $board)
             <?php
-                $comment = str_replace("\n","<br>",$board->comment->comment);
+                $decrypt = Crypt::decryptString($board->comment->comment);
+                $comment = str_replace("\n","<br>",$decrypt);
                 $name    = $board->board_name;
                 $id      = $board->id;
                 $userid  = $board->create_userid;
@@ -44,9 +45,8 @@
         <div class = "button_frame">
             @for($i = 0,$j = 0;$i <= $count;$i++)
                 @if($i % 6 == 0)
-                    <button type = "button" onclick = "location.href = '{{$Test->get_url($title,$j,$search)}}'">
-                        {{++$j}}
-                    </button>
+                    <button type = "button"
+                    onclick = "location.href = '{{$Test->get_url($title,$j,$search)}}'">{{++$j}}</button>
                 @endif
             @endfor
         </div>
@@ -68,4 +68,6 @@
             }, 3000);
         </script>
     @endif
+    <script src="/laravel/public/js/app.js"></script>
+    <script src="/laravel/resources/js/bloadcast.js"></script>
 @endsection
