@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChatEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Chat;
@@ -49,13 +50,14 @@ class ChatController extends Controller
         }
 
         $newmessage = new Chat();
-        $newmessage->create([
+        $newmessage->fill([
             'boardid'=>$id,
             'from'=>$myid,
             'to'=>$request->target,
             'message'=>Crypt::encryptString($request->message),
             'create'=>new DateTime()
-        ]);
+        ])->save();
+        event(new ChatEvent($newmessage));
         
         return $this->return_view($id,$myid,$board);
     }

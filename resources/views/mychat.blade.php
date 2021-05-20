@@ -15,7 +15,7 @@
 @endsection
 
 @section('main')
-<div class = "boards">
+<div class = "boards" id = "app">
     <h1>Chat</h1>
     <article class = "comment">
         @if($other !=NULL)
@@ -33,12 +33,14 @@
         <div class = "chat_box">
             <input type = "hidden" id = "id" value = {{$other->boardid}}>
             <input type = "hidden" name = "target" id = "target" value = "{{$other->userid}}">
-            <textarea placeholder = "メッセージを入力" name = "message" required></textarea>
+            <textarea placeholder = "メッセージを入力" name = "message" required wrap='hard'></textarea>
             <input type="submit" id = "mysubmit" value = "送信">
         </div>
     @endif
 </div>
 @endsection
 @section('script')
-    <script src = "{{ secure_asset('js/main.js')}}"></script>
+    @if($other !=NULL)
+        @include('components.chatScript',['url'=>'../mypage/'.$other->boardid])
+    @endif
 @endsection
