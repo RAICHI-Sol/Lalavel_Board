@@ -56,6 +56,39 @@ $blue:rgb(56, 179, 228);
     font-family: 'M PLUS 1p',cursive;
 }
 
+@mixin ipad(){
+    @media (max-width:830px){
+        @content;
+    }
+}
+
+@mixin ipone(){
+    @media (max-width:420px){
+        @content;
+    }
+}
+/*******************************************
+reset IOS style
+*******************************************/
+input[type = text],
+input[type = submit],
+input[type = email],
+input[type = password],
+input[type = button],
+button,textarea,select{
+  border-radius: 0;
+  -webkit-box-sizing: content-box;
+  -webkit-appearance: button;
+  appearance: button;
+  border: none;
+  box-sizing: border-box;
+    &::-webkit-search-decoration {
+      display: none;
+    }
+    &::focus {
+      outline-offset: -2px;
+    }
+}
 /*******************************************
 html,boby
 *******************************************/
@@ -138,6 +171,9 @@ body{
                     background: $blue;
                 }
             }
+            @include ipone(){
+                width: 60%;
+            }
         }
         .editbox{
             @include div_elements(50%,rgb(255, 214, 214),auto);
@@ -165,6 +201,9 @@ body{
                 &:hover{
                     opacity:1;
                 }
+            }
+            @include ipone(){
+                width: 95%;
             }
         }
     }
@@ -195,19 +234,15 @@ i{
 header
 *******************************************/
 header{
-    position: relative;
+    position: fixed;
+    display: block;
     padding:10px 0px;
-    @include width_height(100%,10%);
+    @include width_height(100%,70px);
     @include font('M PLUS 1p', white,15px);
     margin:0;
     background: deeppink;
-    &.scroll{
-        position: fixed;
-        z-index:3;
-        padding:10px 0px;
-        height: 12%;
-        transition-duration: 0.5s;
-    }
+    z-index:3;
+    transition-duration: 0.5s;
     .header{
         display: flex;
         margin:0px auto;
@@ -217,6 +252,9 @@ header{
             a{
                 text-align: center;
                 @include font('Cherry Swash', white,30px);
+                @include ipone(){
+                    font-size: 20px;
+                }
             }
         }
         p{
@@ -241,6 +279,9 @@ header{
                 &:hover{
                     background: rgb(23, 226, 23);
                 }
+                @include ipone(){
+                    display: none;
+                }
             }
         }
         .menu{
@@ -250,7 +291,7 @@ header{
             border-radius:5px;
             right:0;
             top:80%;
-            z-index:1;
+            z-index:4;
             transition-duration:0.5s;
             a{
                 @include font('M PLUS 1p',black,15px);
@@ -258,6 +299,10 @@ header{
             }
             a:hover{
                 background:rgb(214, 214, 214);
+            }
+            @include ipone(){
+                width: 100%;
+                border: solid 2px silver;
             }
         }
         label[for = menu]{
@@ -289,11 +334,21 @@ header{
                 @include flame(0);
                 @include border(3px 0px 0px 3px,solid 1px silver);
                 width:400px;
+                @media (max-width:930px){
+                    width:300px;
+                }
+                @include ipad(){
+                    width:200px;
+                }
+                @include ipone(){
+                    display: none;
+                }
             }
             button{
                 @include flame(0);
                 @include border(0px 3px 3px 0px,solid 1px silver);
                 @include font('M PLUS 1p', black,20px);
+                background:rgb(230, 230, 230);
                 cursor: pointer;
             }
         }
@@ -307,15 +362,16 @@ main{
     display: flex;
     max-width: 1300px;
     margin:auto;
-    &.scroll{
-        padding-top:70px;
-    }
+    padding-top:70px;
     h1{
         @include font('Cherry Swash', white,25px);
         background-color:deeppink;
         padding:5px;
         border-radius:5px;
         margin:0px 0px 20px 0px;
+        @include ipone(){
+            margin:0px;
+        }
     }
     .setting_menu{
         margin:20px;
@@ -333,15 +389,22 @@ main{
         a:hover{
             background:white;
         }
+        @include ipad(){
+            width:30%;
+        }
+        @include ipone(){
+            display: none;
+        }
     }
-    .gide,.subcomment{
+    .gide{
         @include div_elements(90%,$backcolor,$div_margin);
-        color: black;
-        font-size: 14px;
+        @include font('M PLUS 1p',black,14px);
         padding:10px;
-        @include font('M PLUS 1p',black,15px);
     }
     .subcomment{
+        @include div_elements(95%,$backcolor,10px auto);
+        @include font('M PLUS 1p',rgb(90, 90, 90),14px);
+        padding:10px;
         white-space: pre-wrap;
     }
     .saccess{
@@ -378,7 +441,7 @@ main{
             display: none;
         }
         .board{
-            @include flame(0 auto 10px auto);
+            @include flame(10px auto);
             @include border(5px,0px none);
             background-color:white;
             padding:10px;
@@ -391,6 +454,9 @@ main{
             &:hover{
                 width:90%;
                 background-color:rgb(243, 243, 243);
+            }
+            @include ipone(){
+                width: 100%;
             }
         }
         .comment{
@@ -410,10 +476,6 @@ main{
                 border-bottom:solid 1px silver;
                 font-size: 20px;
                 margin:20px 10px;
-            }
-            p{
-                @include flame(20px);
-                color:rgb(90, 90, 90);
             }
             label[for = message]{
                 display: flex;
@@ -445,6 +507,12 @@ main{
                 &:hover{
                     background: rgb(255, 82, 174);
                 }
+                @include ipad(){
+                    width:60%;
+                }
+            }
+            @include ipone(){
+                width: 100%;
             }
         }
         .button_frame{
@@ -453,10 +521,18 @@ main{
             button{
                 display: inline-block;
                 margin:5px;
+                background:white;
                 border:solid 2px silver;
                 text-align: center;
+                padding:5px 7px;
                 cursor:pointer;
             }
+        }
+        @include ipad(){
+            width:60%;
+        }
+        @include ipone(){
+            @include div_elements(100%,$backcolor,20px auto);
         }
     }
     .make_board,.setting{
@@ -468,9 +544,19 @@ main{
                 color: rgb(202, 3, 3);
             }
         }
+        @include ipad(){
+            width:70%;
+        }
+        @include ipone(){
+            width:100%;
+            margin: 20px auto;
+        }
     }
     .setting{
         margin:20px auto 20px 20px;
+        @include ipone(){
+            margin: 20px auto;
+        }
     }
     .profile{
         @include div_elements(50%,$backcolor,$div_margin);
@@ -513,9 +599,18 @@ main{
                 border-bottom:solid 1px silver;
             }
         }
+        @include ipad(){
+            width:70%;
+        }
+        @include ipone(){
+            width:95%;
+        }
     }
-    .form,.chat_box{
+    .form,._box{
         @include div_elements(90%,rgba(255, 255, 255, 0),$div_margin);
+        @include ipone(){
+            width: 100%;
+        }
     }
     form,.form,.chat_box{
         margin:10px auto;
@@ -527,6 +622,7 @@ main{
             @include flame(10px 20px);
             @include border(10px,solid 1px white);
             @include width_height(50%,40px);
+            background:white;
         }
         select{
             @include width_height(30%,30px);
@@ -569,6 +665,12 @@ main{
         display: flex;
         textarea{
             @include width_height(80%,40px);
+            margin:10px 0px 10px auto;
+            border-radius:10px 0px 0px 10px;
+        }
+        input[type = submit]{
+            margin:10px auto 10px 0px;
+            border-radius:0px 10px 10px 0px;
         }
     }
 }
@@ -635,11 +737,11 @@ login,create form
             opacity: 1;
         }
     }
-    @media (max-width:768px){
-        width:50%;
-    }
-    @media (max-width:420px){
+    @include ipad(){
         width:70%;
+    }
+    @include ipone(){
+        width:90%;
     }
 }
 
