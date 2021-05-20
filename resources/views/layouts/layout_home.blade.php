@@ -5,6 +5,7 @@
         <meta charset = "UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie = edge">
         <link rel = "stylesheet" href = "{{ secure_asset('app.css')}}">
+        <meta name = "viewport" content="width=device-width,initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="https://fonts.googleapis.com/css?family=Cherry+Swash:700" rel="stylesheet">
         <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
@@ -51,6 +52,5 @@
         <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
         @yield('fixed')
     </body>
-    <script src = "{{ secure_asset('js/scroll.js')}}"></script>
     @yield('script')
 </html>
