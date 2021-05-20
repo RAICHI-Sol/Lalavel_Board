@@ -2,7 +2,7 @@ $(function(){
     /************************************************
      * メッセージ送信処理
     ************************************************/
-    $('#submit').click(function(){
+    $(document).on('click','#submit',function(){
         id      = $('#id').val();
         var url = '/chat/' + id;
         messageSend(url);
@@ -10,7 +10,7 @@ $(function(){
     /************************************************
      * メッセージ送信処理(User Side)
     ************************************************/
-    $('#mysubmit').click(function(){
+    $(document).on('click','#mysubmit',function(){
         id      = $('#id').val();
         var url = '/chat/mypage/' + id;
         messageSend(url);
@@ -19,7 +19,7 @@ $(function(){
     /************************************************
      * プロフィール設定処理
     ************************************************/
-    $('.form > input[type = "submit"]').click(function(){
+     $(document).on('click','#prosubmit',function(){
         username = $('input[name="name"]').val();
         sex      = $('input[name="sex"]:checked').val();
         from     = $('select[name="from"]').val();
