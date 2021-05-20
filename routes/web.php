@@ -65,9 +65,10 @@ Route::prefix('logout')->group(function(){
 //アカウント作成処理でのグループ化
 Route::prefix('create')->group(function(){
     Route::get('/',function(){return view('Auth/create_view');})->name('create');
-    Route::post('/add',[UserController::class,'create']);
+    Route::post('/',[UserController::class,'check'])->name('createCheck');
 });
 
+//チャット関連処理のグループ化
 Route::prefix('chat')->group(function(){
     Route::get('{id}', [ChatController::class, 'show'])->name('chat')->middleware('auth');
     Route::post('{id}', [ChatController::class, 'add'])->name('message');
@@ -75,6 +76,7 @@ Route::prefix('chat')->group(function(){
     Route::post('mypage/{id}', [MyChatController::class, 'add'])->name('mymessage');
 });
 
+//チャット関連処理のグループ化
 Route::prefix('board')->group(function(){
     Route::get('{id}', [BoardController::class, 'show']);
 });
