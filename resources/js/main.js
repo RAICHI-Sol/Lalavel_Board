@@ -1,40 +1,34 @@
 $(function(){
+    var jqxhr = null;
     /************************************************
      * メッセージ送信処理
     ************************************************/
-    $('#submit').on('click',function(){
+    $(document).on('click','#submit',function(){
         id      = $('#id').val();
         var url = '/laravel/public/chat/' + id;
-        messageSend(url);
+        messageSend(url,'#submit');
     });
     /************************************************
      * メッセージ送信処理(User Side)
     ************************************************/
-    $('#mysubmit').on('click',function(){
+    $(document).on('click','#mysubmit',function(){
         id      = $('#id').val();
         var url = '/laravel/public/chat/mypage/' + id;
-        messageSend(url);
+        messageSend(url,'#mysubmit');
     });
 
     /************************************************
      * プロフィール設定処理
     ************************************************/
-    $('.form > input[type = "submit"]').on('click',function(){
-        username = $('input[name="name"]').val();
-        sex      = $('input[name="sex"]:checked').val();
-        from     = $('select[name="from"]').val();
-        old      = $('select[name="old"]').val();
-        job      = $('select[name="job"]').val();
-        profile  = $('textarea[name="profile"]').val();
-
+    $(document).on('click','#prosubmit',function(){
         var url  = '/laravel/public/setting/profile/'
         var data = {
-            "name":username,
-            "sex":sex,
-            "from":from,
-            "old":old,
-            "job":job,
-            "profile":profile,
+            "name":$('input[name="name"]').val(),
+            "sex":$('input[name="sex"]:checked').val(),
+            "from":$('select[name="from"]').val(),
+            "old":$('select[name="old"]').val(),
+            "job":$('select[name="job"]').val(),
+            "profile":$('textarea[name="profile"]').val(),
         };
         ajaxSend("PUT",url,data);
     });
@@ -42,21 +36,35 @@ $(function(){
     /************************************************
      * ajaxによるリアルタイム通信
     ************************************************/
-    function messageSend(url){
+    function messageSend(url,buttonid){
         message = $('textarea[name="message"]').val();
-        target  = $('#target').val();
+        
+        //連続入力を中止
+        $(buttonid).prop('disabled',true);
+        
+        //メッセージが空の場合送信しない
+        if(message == ""){
+            return;
+        }
+        else{
+            target  = $('#target').val();
 
-        var data = {
-            "target":target,
-            "message":message,
-        };
-        ajaxSend("POST",url,data);
+            var data = {
+                "target":target,
+                "message":message,
+            };
+            ajaxSend("POST",url,data);
+        }
     }
 
     /************************************************
      * ajaxによるリアルタイム通信
     ************************************************/
     function ajaxSend(type,url,data){
+        //直前に実行したajaxを中断
+        if(jqxhr){
+            jqxhr.abort();
+        }
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -64,7 +72,7 @@ $(function(){
             type:type,
             timeout:10000,
         });
-        $.ajax({
+        jqxhr = $.ajax({
             url:url,
             data:data,
             context:{text:type},
