@@ -5,7 +5,7 @@
         onclick = "click_edit({{$id}},'{{$name}}','{{$comment}}')"></button>
     </label>
     <label for = "delete{{$id}}">
-        <i class="fas fa-minus-square red"></i>
+        <i class="fas fa-trash-alt red"></i>
         <button id = "delete{{$id}}" onclick = "click_delete({{$id}})"></button>
     </label>
 @endif
