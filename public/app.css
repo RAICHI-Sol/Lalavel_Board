@@ -12,6 +12,7 @@ input[type=submit],
 input[type=email],
 input[type=password],
 input[type=button],
+input[type=search],
 button, textarea, select {
   border-radius: 0;
   -webkit-box-sizing: content-box;
@@ -28,6 +29,7 @@ input[type=submit]::-webkit-search-decoration,
 input[type=email]::-webkit-search-decoration,
 input[type=password]::-webkit-search-decoration,
 input[type=button]::-webkit-search-decoration,
+input[type=search]::-webkit-search-decoration,
 button::-webkit-search-decoration, textarea::-webkit-search-decoration, select::-webkit-search-decoration {
   display: none;
 }
@@ -37,6 +39,7 @@ input[type=submit]::focus,
 input[type=email]::focus,
 input[type=password]::focus,
 input[type=button]::focus,
+input[type=search]::focus,
 button::focus, textarea::focus, select::focus {
   outline-offset: -2px;
 }
@@ -52,6 +55,7 @@ html,boby
 html {
   -webkit-appearance: none;
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -250,14 +254,24 @@ p.gide_text {
 
 h3 {
   font-family: "M PLUS 1p", cursive;
-  color: black;
+  color: white;
   font-size: 20px;
-  margin: 10px;
+  -webkit-box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  display: block;
+  background: deeppink;
+  padding: 5px 0 5px 10px;
+  width: 30%;
 }
 
 i {
   margin-right: 10px;
   font-size: 30px;
+}
+
+video {
+  margin: auto;
+  width: 100%;
 }
 
 /*******************************************
@@ -298,6 +312,12 @@ header .header h1 a {
   font-size: 30px;
 }
 
+@media (max-width: 830px) {
+  header .header h1 a {
+    font-size: 25px;
+  }
+}
+
 @media (max-width: 420px) {
   header .header h1 a {
     font-size: 20px;
@@ -336,9 +356,15 @@ header .header a.make_board:hover {
   background: #17e217;
 }
 
-@media (max-width: 420px) {
-  header .header a.make_board {
+@media (max-width: 830px) {
+  header .header a.make_board span {
     display: none;
+  }
+}
+
+@media (max-width: 830px) {
+  header .header a.make_board {
+    padding-right: 0;
   }
 }
 
@@ -377,7 +403,15 @@ header .header label[for=menu] {
   display: block;
   color: white;
   cursor: pointer;
+  margin-right: 0;
   font-size: 18px;
+}
+
+@media (max-width: 830px) {
+  header .header label[for=menu] {
+    margin-left: auto;
+    font-size: 13px;
+  }
 }
 
 header .header label[for=menu] i {
@@ -392,11 +426,43 @@ header .header label[for=menu] i:hover {
   color: #bebebe;
 }
 
+header .header .search_hidden {
+  position: absolute;
+  background: white;
+  display: none;
+  width: 100%;
+  top: 100%;
+  z-index: 4;
+  border: solid 2px silver;
+}
+
+header .header label[for=search] {
+  border-radius: 3px;
+  border: solid 1px silver;
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 20px;
+  background: #e6e6e6;
+  padding: 0 5px;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 420px) {
+  header .header label[for=search] {
+    display: block;
+  }
+}
+
 header .header input[type=checkbox] {
   display: none;
 }
 
-header .header input[type=checkbox]:checked + .menu {
+header .header input[type=checkbox]#menu:checked + .menu {
+  display: block;
+}
+
+header .header input[type=checkbox]#search:checked + .search_hidden {
   display: block;
 }
 
@@ -430,7 +496,7 @@ header .header form.seach_form input[type=search] {
 
 @media (max-width: 420px) {
   header .header form.seach_form input[type=search] {
-    display: none;
+    width: 300px;
   }
 }
 
@@ -444,6 +510,18 @@ header .header form.seach_form button {
   font-size: 20px;
   background: #e6e6e6;
   cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  header .header form.seach_form {
+    display: none;
+  }
+  header .header form.seach_form.hidden {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 10px 20px;
+  }
 }
 
 /*******************************************
@@ -472,20 +550,25 @@ main h1 {
 @media (max-width: 420px) {
   main h1 {
     margin: 0px;
+    font-family: "Cherry Swash", cursive;
+    color: white;
+    font-size: 20px;
   }
 }
 
-main .setting_menu {
+main .setting_menu, main .contents {
+  display: block;
+  position: fixed;
   margin: 20px;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
   width: 20%;
-  max-height: 30vh;
+  height: 30%;
 }
 
-main .setting_menu a {
+main .setting_menu a, main .contents a {
   display: block;
-  margin: 20px;
+  margin: 10px 20px;
   font-family: "M PLUS 1p", cursive;
   color: black;
   font-size: 18px;
@@ -495,20 +578,36 @@ main .setting_menu a {
   border-bottom: solid 1px silver;
 }
 
-main .setting_menu a:hover {
+main .setting_menu a:hover, main .contents a:hover {
   background: white;
 }
 
 @media (max-width: 830px) {
-  main .setting_menu {
-    width: 30%;
+  main .setting_menu a span, main .contents a span {
+    display: none;
+  }
+}
+
+@media (max-width: 830px) {
+  main .setting_menu, main .contents {
+    width: 15%;
   }
 }
 
 @media (max-width: 420px) {
-  main .setting_menu {
+  main .setting_menu, main .contents {
     display: none;
   }
+}
+
+main .contents {
+  right: 10px;
+  height: 50%;
+}
+
+main .contents a {
+  font-size: 16px;
+  border-bottom: 0px none;
 }
 
 main .gide {
@@ -522,6 +621,19 @@ main .gide {
   color: black;
   font-size: 14px;
   padding: 10px;
+  border-left: solid 5px deeppink;
+}
+
+main .gide ul {
+  padding-left: 20px;
+}
+
+main .gide ul.annotation {
+  display: block;
+  border-radius: 10px;
+  font-family: "M PLUS 1p", cursive;
+  color: black;
+  font-size: 12px;
 }
 
 main .subcomment {
@@ -565,7 +677,7 @@ main .saccess a {
 main .boards {
   width: 50%;
   background: rgba(255, 255, 255, 0.6);
-  margin: 20px auto 20px 20px;
+  margin: 20px auto;
   border-radius: 5px;
   padding-bottom: 10px;
   font-family: 'M PLUS 1p',cursive;
@@ -775,23 +887,13 @@ main .make_board p.red, main .setting p.red {
 
 @media (max-width: 830px) {
   main .make_board, main .setting {
-    width: 70%;
+    width: 60%;
   }
 }
 
 @media (max-width: 420px) {
   main .make_board, main .setting {
     width: 100%;
-    margin: 20px auto;
-  }
-}
-
-main .setting {
-  margin: 20px auto 20px 20px;
-}
-
-@media (max-width: 420px) {
-  main .setting {
     margin: 20px auto;
   }
 }
