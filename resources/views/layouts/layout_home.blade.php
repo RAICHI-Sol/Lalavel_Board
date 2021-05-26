@@ -25,8 +25,16 @@
                     <input type = "search" name = "search" maxlength ="30" placeholder = "検索">
                     <button type = "submit"><span class = "fas fa-search"></button>
                 </form>
+                <label for = "search"><span class = "fas fa-search"></label>
+                <input type="checkbox" id = "search">
+                <div class = "search_hidden">
+                    <form method = "GET" class = "seach_form hidden" action = {{route('result')}}>
+                        <input type = "search" name = "search" maxlength ="30" placeholder = "検索">
+                        <button type = "submit"><span class = "fas fa-search"></button>
+                    </form>
+                </div>
                 @if(Auth::check())
-                    <a href = {{route('make_get')}} class = "make_board"><i class="fas fa-edit"></i>投稿する</a>
+                    <a href = {{route('make_get')}} class = "make_board"><i class="fas fa-edit"></i><span>投稿する</span></a>
                     <label for = "menu">{{Auth::user()->name}}<i class = "fas fa-user-circle"></i></label>
                     <input type="checkbox" id = "menu">
                     <div class = "menu">
@@ -52,6 +60,7 @@
         <main>
             @yield('menu')
             @yield('main')
+            @yield('contents')
         </main>
         @if((!Request::is('chat/mypage/*')) && (!Request::is('chat/*')))
             <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
