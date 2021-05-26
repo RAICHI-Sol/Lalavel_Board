@@ -15,19 +15,20 @@
 @endsection
 
 @section('main')
-<div class = "boards" id = "app">
-    <h1>Chat</h1>
-    <article class = "comment">
+<div id = "app" class = "boards">
+    <article class = "chat_comment">
         @if($other !=NULL)
             <h2>{{$other->user->name}}</h2>
         @else
             <h2>メッセージはありません</h2>
         @endif
-        @if($chats !=NULL)
-            @foreach($chats as $chat)
-                @include('components.chatComment',['chat'=>$chat])
-            @endforeach
-        @endif
+        <article class = "chats">
+            @if($chats !=NULL)
+                @foreach($chats as $chat)
+                    @include('components.chatComment',['chat'=>$chat])
+                @endforeach
+            @endif
+        </article>
     </article>
     @if($other !=NULL)
         <div class = "chat_box">

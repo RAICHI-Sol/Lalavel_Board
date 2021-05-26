@@ -12,15 +12,16 @@
 @endsection
 
 @section('main')
-<div class = "boards" id = "app">
-    <h1>Chat</h1>
-    <article class = "comment">
+<div id = "app" class = "boards">
+    <article class = "chat_comment">
         <h2>{{$board->board_name}}</h2>
-        @if($chats !=NULL)
-            @foreach($chats as $chat)
-                @include('components.chatComment',['chat'=>$chat])
-            @endforeach
-        @endif
+        <article class = "chats">
+            @if($chats !=NULL)
+                @foreach($chats as $chat)
+                    @include('components.chatComment',['chat'=>$chat])
+                @endforeach
+            @endif
+        </article>
     </article>
     <div class = "chat_box">
         <input type = "hidden" id = "id" value = {{$board->id}}>

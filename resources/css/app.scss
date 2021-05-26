@@ -459,7 +459,7 @@ main{
                 width: 100%;
             }
         }
-        .comment{
+        .comment,.chat_comment{
             @include flame(0 auto 10px auto);
             @include border(5px,0px none);
             background-color:white;
@@ -476,24 +476,6 @@ main{
                 border-bottom:solid 1px silver;
                 font-size: 20px;
                 margin:20px 10px;
-            }
-            label[for = message]{
-                display: flex;
-                .message{
-                    display: block;
-                    margin:10px;
-                    border-radius: 10px;
-                    background:rgb(228, 228, 228);
-                    min-width:20vh;
-                    max-width:45vh;
-                    padding:8px;
-                    white-space: pre-wrap;
-                    &.mine{
-                        background:rgb(1, 148, 233);
-                        color: white;
-                        margin-left: auto;
-                    }
-                }
             }
             .contact{
                 @include flame(20px auto 10px auto);
@@ -513,6 +495,33 @@ main{
             }
             @include ipone(){
                 width: 100%;
+            }
+        }
+        .chat_comment{
+            width: 100%;
+            .chats{
+                min-height:49vh;
+                max-height:49vh;
+                overflow:hidden;
+                overflow-y:scroll;
+                label[for = message]{
+                    display: flex;
+                    .message{
+                        display: block;
+                        margin:10px;
+                        border-radius: 10px;
+                        background:rgb(228, 228, 228);
+                        min-width:20vh;
+                        max-width:45vh;
+                        padding:8px;
+                        white-space: pre-wrap;
+                        &.mine{
+                            background:rgb(1, 148, 233);
+                            color: white;
+                            margin-left: auto;
+                        }
+                    }
+                }
             }
         }
         .button_frame{
