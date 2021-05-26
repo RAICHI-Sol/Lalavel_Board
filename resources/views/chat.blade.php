@@ -4,11 +4,7 @@
 @section("title",'チャット')
 
 @section('menu')
-<div class = "setting_menu">
-    <h1>menu</h1>
-    <a href = "{{ route('home_get') }}">ホーム</a>
-    <a href = "{{ route('gide') }}">このサイトについて</a>
-</div>
+    @include('components.menu')
 @endsection
 
 @section('main')

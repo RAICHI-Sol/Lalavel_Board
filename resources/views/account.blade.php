@@ -5,11 +5,7 @@
 @section("title",'設定')
 
 @section('menu')
-<div class = "setting_menu">
-    <h1>menu</h1>
-    <a href = "{{ route('set_prof') }}">プロフィール編集</a>
-    <a href = "{{ route('set_account') }}">アカウント設定</a>
-</div>
+    @include('components.menu')
 @endsection
 
 @section('main')
