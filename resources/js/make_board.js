@@ -16,7 +16,7 @@ function click_delete(id)
     $("#delete_fix").append("<div class='box'></div>");
     $(".box").append("<p class ='head'>ボードを削除します。</p>");
     $(".box").append("<button id = 'OK'>削除する</button>");
-    $(".box").append("<button id = 'NO'>削除しない</button>");
+    $(".box").append("<button id = 'NO'>キャンセル</button>");
 
     $("#OK").on('click',function(){
         var data = {'id':id};
