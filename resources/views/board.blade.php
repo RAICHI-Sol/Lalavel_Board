@@ -3,11 +3,7 @@
 @section("title",$boards->board_name)
 
 @section('menu')
-<div class = "setting_menu">
-    <h1>menu</h1>
-    <a href = "{{ route('home_get') }}">ホーム</a>
-    <a href = "{{ route('gide') }}">このサイトについて</a>
-</div>
+    @include('components.menu')
 @endsection
 
 @section('main')
@@ -41,7 +37,7 @@
                 </a>
             @else
                 <a href = {{route('mychat',$id)}} class = "contact">
-                    <i class="fas fa-comments"></i>トーク内容を確認する
+                    <i class="fas fa-comments"></i>トーク内容を確認
                 </a>
             @endif
         @else
