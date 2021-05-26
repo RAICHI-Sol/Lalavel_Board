@@ -13,7 +13,11 @@
         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
         <title>@yield('title')</title>
     </head>
-    <body class = "home">
+    @if((!Request::is('chat/mypage/*')) && (!Request::is('chat/*')))
+        <body class = "home">
+    @else
+        <body>
+    @endif
         <header>
             <div class = "header">
                 <h1><a href = {{route('home_get')}}>Home Page</a></h1>
@@ -49,7 +53,9 @@
             @yield('menu')
             @yield('main')
         </main>
-        <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
+        @if((!Request::is('chat/mypage/*')) && (!Request::is('chat/*')))
+            <footer><p>Copyright © 2021 RAICHI All Rights Reserved.<p></footer>
+        @endif
         @yield('fixed')
     </body>
     @yield('script')
